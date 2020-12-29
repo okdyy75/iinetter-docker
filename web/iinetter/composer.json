@@ -9,11 +9,13 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "appointer/swaggervel": "dev-master",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "infyomlabs/adminlte-templates": "^1.0",
         "infyomlabs/laravel-generator": "dev-develop",
+        "infyomlabs/swagger-generator": "dev-master",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^3.0",
@@ -63,5 +65,11 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ]
-    }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:InfyOmLabs/swaggervel.git"
+        }
+    ]
 }
