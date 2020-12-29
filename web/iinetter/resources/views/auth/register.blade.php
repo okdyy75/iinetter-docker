@@ -89,11 +89,6 @@
 
             <div class="row">
                 <div class="col-xs-8">
-                    <div class="checkbox icheck">
-                        <label>
-                            <input type="checkbox"> @lang('auth.registration.i_agree') <a href="#">@lang('auth.registration.terms')</a>
-                        </label>
-                    </div>
                 </div>
                 <!-- /.col -->
                 <div class="col-xs-4">
