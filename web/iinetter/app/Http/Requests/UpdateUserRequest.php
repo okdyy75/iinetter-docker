@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Requests\API\V1;
+namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Models\User;
-use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUserRequest extends APIRequest
+class UpdateUserRequest extends FormRequest
 {
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -27,7 +28,6 @@ class UpdateUserRequest extends APIRequest
         $rules = User::$rules;
         $rules['name'] = $rules['name'].",".$this->route("user");
         $rules['email'] = $rules['email'].",".$this->route("user");
-        $rules['password'] = str_replace('required', 'nullable', $rules['password']);
         return $rules;
     }
 }
