@@ -84,6 +84,18 @@
         "inView": false
     },
     {
+        "name": "is_admin",
+        "dbType": "boolean:default,false",
+        "htmlType": "checkbox,1",
+        "validations": "nullable|boolean",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
         "name": "created_at",
         "dbType": "timestamp",
         "htmlType": "",

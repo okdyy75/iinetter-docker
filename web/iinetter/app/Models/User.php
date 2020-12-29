@@ -47,6 +47,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
  *          type="string"
  *      ),
  *      @SWG\Property(
+ *          property="is_admin",
+ *          description="is_admin",
+ *          type="boolean"
+ *      ),
+ *      @SWG\Property(
  *          property="created_at",
  *          description="created_at",
  *          type="string",
@@ -77,6 +82,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'is_admin'
     ];
 
     /**
@@ -102,7 +108,8 @@ class User extends Authenticatable
         'email' => 'string',
         'password' => 'string',
         'api_token' => 'string',
-        'remember_token' => 'string'
+        'remember_token' => 'string',
+        'is_admin' => 'boolean'
     ];
 
     /**
@@ -111,8 +118,9 @@ class User extends Authenticatable
      * @var array
      */
     public static $rules = [
-        'name' => ['required', 'string', 'max:255', 'unique:users,name', 'regex:/^[0-9a-zA-Z]+$/'],
-        'email' => ['required', 'email', 'max:255', 'unique:users,email'],
-        'password' => ['required', 'string', 'confirmed', 'min:8', 'regex:/^[0-9a-zA-Z]+$/'],
-    ];
+        'name' => 'required|string|max:255|regex:/^[0-9a-zA-Z]+$/|unique:users,name',
+        'email' => 'required|email|max:255|unique:users,email',
+        'password' => 'required|string|confirmed|min:8|regex:/^[0-9a-zA-Z]+$/',
+        'is_admin' => 'nullable|boolean'
+    ];  
 }

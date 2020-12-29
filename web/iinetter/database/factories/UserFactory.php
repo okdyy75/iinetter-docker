@@ -30,6 +30,7 @@ class UserFactory extends Factory
             'password' => Hash::make($this->faker->password),
             'api_token' => hash('sha256', Str::random(60)),
             'remember_token' => Str::random(10),
+            'is_admin' => $this->faker->randomElement([true, false]),
         ];
     }
 }
