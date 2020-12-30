@@ -23,5 +23,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['middleware' => ['auth:web']], function () {
     Route::resource('users', App\Http\Controllers\UserController::class);
+    Route::resource('userProfiles', App\Http\Controllers\UserProfileController::class);
     Route::resource('tweets', App\Http\Controllers\TweetController::class);
 });

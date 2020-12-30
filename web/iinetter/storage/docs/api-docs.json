@@ -388,6 +388,120 @@
                     }
                 ]
             }
+        },
+        "/user_profile": {
+            "get": {
+                "tags": [
+                    "UserProfile"
+                ],
+                "summary": "Display the specified UserProfile",
+                "description": "Get UserProfile",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/UserProfile"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "UserProfile"
+                ],
+                "summary": "Store a newly created UserProfile in storage",
+                "description": "Store UserProfile",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "screen_name",
+                        "in": "formData",
+                        "description": "UserProfile screen_name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "description",
+                        "in": "formData",
+                        "description": "UserProfile description",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "location",
+                        "in": "formData",
+                        "description": "UserProfile location",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "formData",
+                        "description": "UserProfile url",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "icon",
+                        "in": "formData",
+                        "description": "UserProfile icon file",
+                        "required": false,
+                        "type": "file"
+                    },
+                    {
+                        "name": "header_image",
+                        "in": "formData",
+                        "description": "UserProfile header_image file",
+                        "required": false,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/UserProfile"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
+            }
         }
     },
     "definitions": {
@@ -488,6 +602,57 @@
                 "is_admin": {
                     "description": "is_admin",
                     "type": "boolean"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
+        "UserProfile": {
+            "required": [
+                ""
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "screen_name": {
+                    "description": "screen_name",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "description",
+                    "type": "string"
+                },
+                "location": {
+                    "description": "location",
+                    "type": "string"
+                },
+                "url": {
+                    "description": "url",
+                    "type": "string"
+                },
+                "icon": {
+                    "description": "icon",
+                    "type": "string"
+                },
+                "header_image": {
+                    "description": "header_image",
+                    "type": "string"
                 },
                 "created_at": {
                     "description": "created_at",

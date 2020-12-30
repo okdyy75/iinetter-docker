@@ -125,6 +125,14 @@ class User extends Authenticatable
     ];  
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     **/
+    public function userProfile()
+    {
+        return $this->hasOne(\App\Models\UserProfile::class);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      **/
     public function tweets()

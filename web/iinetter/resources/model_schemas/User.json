@@ -121,6 +121,10 @@
     },
     {
         "type": "relation",
+        "relation": "1t1,UserProfile"
+    },
+    {
+        "type": "relation",
         "relation": "1tm,Tweet"
     }
 ]
