@@ -1,3 +1,6 @@
+const environment = process.env.NODE_ENV || 'development'
+const env = require(`./env.${environment}.js`)
+
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
   ssr: false,
@@ -5,16 +8,21 @@ export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
 
+  env: {
+    ...env
+  },
+
   router: {
     middleware: ['auth']
   },
+
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'iinetter',
+    title: env.DEFAULT_TITLE,
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
+      { hid: 'description', name: 'description', content: env.DEFAULT_DESCRIPTION }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -51,7 +59,9 @@ export default {
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    baseURL: env.API_BASE_URL
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
