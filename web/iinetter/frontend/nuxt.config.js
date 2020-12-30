@@ -5,6 +5,9 @@ export default {
   // Target (https://go.nuxtjs.dev/config-target)
   target: 'static',
 
+  router: {
+    middleware: ['auth']
+  },
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
     title: 'iinetter',
@@ -39,6 +42,8 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    // https://auth.nuxtjs.org/
+    '@nuxtjs/auth',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://github.com/nuxt-community/fontawesome-module
@@ -50,6 +55,23 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+  auth: {
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      callback: false,
+      home: '/'
+    },
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'api/v1/login', method: 'post', propertyName: 'token' },
+          user: { url: 'api/v1/user', method: 'get', propertyName: false },
+          logout: false
+        }
+      }
+    }
   },
   fontawesome: {
     imports: [
