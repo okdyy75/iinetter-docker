@@ -30,6 +30,24 @@ class TweetTest extends TestCase
     /**
      * @test
      */
+    public function test_update_tweet()
+    {
+        $user = User::factory()->create();
+        $tweet = Tweet::factory()->create(['user_id' => $user->id, 'tweet_type' => 'tweet']);
+        $editedTweet = Tweet::factory()->make()->only(['reply_count', 'retweet_count', 'favorite_count']);
+
+        $this->response = $this->actingAs($user, 'api')->json(
+            'PATCH',
+            '/api/v1/tweets/'.$tweet->id,
+            $editedTweet
+        );
+
+        $this->assertApiResponse($editedTweet);
+    }
+
+    /**
+     * @test
+     */
     public function test_delete_tweet()
     {
         $user = User::factory()->create();

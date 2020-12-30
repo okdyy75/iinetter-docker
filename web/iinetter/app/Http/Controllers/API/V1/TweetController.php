@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Http\Requests\API\V1\CreateTweetRequest;
 use App\Models\Tweet;
 use App\Repositories\TweetRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
+use App\Http\Requests\API\V1\CreateTweetRequest;
+use App\Http\Requests\API\V1\UpdateTweetRequest;
 use Illuminate\Support\Facades\Gate;
 use Response;
 
@@ -114,6 +115,83 @@ class TweetController extends AppBaseController
         $tweet = $this->tweetRepository->create($input);
 
         return $this->sendResponse($tweet->toArray(), 'Tweet saved successfully');
+    }
+
+    /**
+     * @param int $id
+     * @param UpdateTweetRequest $request
+     * @return Response
+     *
+     * @SWG\Patch(
+     *      path="/tweets/{id}",
+     *      summary="Update the specified Tweet in storage",
+     *      tags={"Tweet"},
+     *      description="Update Tweet",
+     *      produces={"application/json"},
+     *      security={{"apiToken":{}}},
+     *      @SWG\Parameter(
+     *          name="id",
+     *          description="id of Tweet",
+     *          type="integer",
+     *          required=true,
+     *          in="path"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="reply_count",
+     *          description="reply_count of User",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="retweet_count",
+     *          description="retweet_count of User",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Parameter(
+     *          name="favorite_count",
+     *          description="favorite_count of User",
+     *          type="string",
+     *          required=false,
+     *          in="query"
+     *      ),
+     *      @SWG\Response(
+     *          response=200,
+     *          description="successful operation",
+     *          @SWG\Schema(
+     *              type="object",
+     *              @SWG\Property(
+     *                  property="success",
+     *                  type="boolean"
+     *              ),
+     *              @SWG\Property(
+     *                  property="data",
+     *                  ref="#/definitions/Tweet"
+     *              ),
+     *              @SWG\Property(
+     *                  property="message",
+     *                  type="string"
+     *              )
+     *          )
+     *      )
+     * )
+     */
+    public function update($id, UpdateTweetRequest $request)
+    {
+        $input = $request->only(['reply_count', 'retweet_count', 'favorite_count']);
+
+        /** @var Tweet $tweet */
+        $tweet = $this->tweetRepository->find($id);
+
+        if (empty($tweet)) {
+            return $this->sendError('Tweet not found');
+        }
+
+        $tweet = $this->tweetRepository->update($input, $id);
+
+        return $this->sendResponse($tweet->toArray(), 'Tweet updated successfully');
     }
 
     /**

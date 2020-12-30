@@ -253,6 +253,70 @@
                         "apiToken": []
                     }
                 ]
+            },
+            "patch": {
+                "tags": [
+                    "Tweet"
+                ],
+                "summary": "Update the specified Tweet in storage",
+                "description": "Update Tweet",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Tweet",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "reply_count",
+                        "in": "query",
+                        "description": "reply_count of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "retweet_count",
+                        "in": "query",
+                        "description": "retweet_count of User",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "favorite_count",
+                        "in": "query",
+                        "description": "favorite_count of User",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Tweet"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
             }
         },
         "/user": {
