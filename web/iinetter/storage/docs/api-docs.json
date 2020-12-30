@@ -126,6 +126,135 @@
                 }
             }
         },
+        "/tweets": {
+            "get": {
+                "tags": [
+                    "Tweet"
+                ],
+                "summary": "Get a listing of the Tweets.",
+                "description": "Get all Tweets",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/Tweet"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Tweet"
+                ],
+                "summary": "Store a newly created Tweet in storage",
+                "description": "Store Tweet",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "description": "Tweet that should be stored",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/Tweet"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/Tweet"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
+            }
+        },
+        "/tweets/{id}": {
+            "delete": {
+                "tags": [
+                    "Tweet"
+                ],
+                "summary": "Remove the specified Tweet from storage",
+                "description": "Delete Tweet",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id of Tweet",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "string"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "apiToken": []
+                    }
+                ]
+            }
+        },
         "/user": {
             "get": {
                 "tags": [
@@ -262,6 +391,63 @@
         }
     },
     "definitions": {
+        "Tweet": {
+            "required": [
+                "ref_tweet_id",
+                "tweet_type",
+                "tweet_text"
+            ],
+            "properties": {
+                "id": {
+                    "description": "id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "user_id": {
+                    "description": "user_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "ref_tweet_id": {
+                    "description": "ref_tweet_id",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "tweet_type": {
+                    "description": "tweet_type",
+                    "type": "string"
+                },
+                "tweet_text": {
+                    "description": "tweet_text",
+                    "type": "string"
+                },
+                "reply_count": {
+                    "description": "reply_count",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "retweet_count": {
+                    "description": "retweet_count",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "favorite_count": {
+                    "description": "favorite_count",
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "created_at": {
+                    "description": "created_at",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "updated_at": {
+                    "description": "updated_at",
+                    "type": "string",
+                    "format": "date-time"
+                }
+            }
+        },
         "User": {
             "required": [
                 "name",
@@ -298,6 +484,10 @@
                 "remember_token": {
                     "description": "remember_token",
                     "type": "string"
+                },
+                "is_admin": {
+                    "description": "is_admin",
+                    "type": "boolean"
                 },
                 "created_at": {
                     "description": "created_at",

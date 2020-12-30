@@ -118,5 +118,9 @@
         "inForm": false,
         "inIndex": false,
         "inView": false
+    },
+    {
+        "type": "relation",
+        "relation": "1tm,Tweet"
     }
 ]

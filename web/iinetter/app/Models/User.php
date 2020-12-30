@@ -123,4 +123,12 @@ class User extends Authenticatable
         'password' => 'required|string|confirmed|min:8|regex:/^[0-9a-zA-Z]+$/',
         'is_admin' => 'nullable|boolean'
     ];  
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     **/
+    public function tweets()
+    {
+        return $this->hasMany(\App\Models\Tweet::class);
+    }
 }

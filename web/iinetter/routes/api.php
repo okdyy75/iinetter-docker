@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\V1\TweetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,5 +23,9 @@ Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
         Route::get('user', 'UserController@index');
         Route::patch('user', 'UserController@update');
         Route::delete('user', 'UserController@destroy');
+
+        Route::get('tweets', [TweetController::class, 'index']);
+        Route::post('tweets', [TweetController::class, 'store']);
+        Route::delete('tweets/{id}', [TweetController::class, 'destroy']);
     });
 });

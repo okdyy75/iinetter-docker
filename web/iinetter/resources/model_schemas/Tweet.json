@@ -1,0 +1,126 @@
+[
+    {
+        "name": "id",
+        "dbType": "bigInteger,true,true",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": true,
+        "inForm": false,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "user_id",
+        "dbType": "bigInteger:unsigned:foreign,users,id",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": false,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "ref_tweet_id",
+        "dbType": "bigInteger:unsigned:foreign,tweets,id:nullable",
+        "htmlType": "number",
+        "validations": "nullable|required_if:tweet_type,retweet,reply|integer|exists:tweets,id",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "tweet_type",
+        "dbType": "enum,tweet,retweet,reply",
+        "htmlType": "radio,tweet,retweet,reply",
+        "validations": "required|string|in:tweet,retweet,reply",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "tweet_text",
+        "dbType": "string:nullable",
+        "htmlType": "textarea",
+        "validations": "nullable|required_if:tweet_type,tweet,reply|string|max:255",
+        "searchable": true,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "reply_count",
+        "dbType": "integer:default,0",
+        "htmlType": "number",
+        "validations": "nullable|integer|min:0",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "retweet_count",
+        "dbType": "integer:default,0",
+        "htmlType": "number",
+        "validations": "nullable|integer|min:0",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "favorite_count",
+        "dbType": "integer:default,0",
+        "htmlType": "number",
+        "validations": "nullable|integer|min:0",
+        "searchable": false,
+        "fillable": true,
+        "primary": false,
+        "inForm": true,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "created_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "name": "updated_at",
+        "dbType": "timestamp",
+        "htmlType": "",
+        "validations": "",
+        "searchable": false,
+        "fillable": false,
+        "primary": false,
+        "inForm": false,
+        "inIndex": true,
+        "inView": true
+    },
+    {
+        "type": "relation",
+        "relation": "mt1,Tweet:refTweet,ref_tweet_id,id"
+    }
+]
