@@ -21,13 +21,15 @@ class UserProfileApiTest extends TestCase
         $userProfile = UserProfile::factory()->make([
             'user_id' => $user->id,
         ])->toArray();
-        unset($userProfile['icon']);
-        unset($userProfile['header_image']);
+        $userProfile['icon'] = null;
+        $userProfile['header_image'] = null;
 
         $this->response = $this->actingAs($user, 'api')->json(
             'POST',
             '/api/v1/user_profile', $userProfile
         );
+        $userProfile['icon_url'] = 'http://localhost/images/user_icon_default.png';
+        $userProfile['header_image_url'] = 'http://localhost/images/user_header_image_default.png';
 
         $this->assertApiResponse($userProfile);
     }

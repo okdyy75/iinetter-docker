@@ -84,6 +84,11 @@ class UserProfile extends Model
         'header_image'
     ];
 
+    protected $appends = [
+        'icon_url',
+        'header_image_url',
+    ];
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -120,5 +125,19 @@ class UserProfile extends Model
     public function user()
     {
         return $this->belongsTo(\App\Models\User::class, 'user_id', 'id');
+    }
+
+    #
+    # Accessors
+    #
+
+    public function getIconUrlAttribute()
+    {
+        return isset($this->icon) ? asset('storage/'.$this->icon) : config('app.url') . '/images/user_icon_default.png';
+    }
+
+    public function getHeaderImageUrlAttribute()
+    {
+        return isset($this->header_image) ? asset('storage/'.$this->header_image) : config('app.url') . '/images/user_header_image_default.png';
     }
 }
