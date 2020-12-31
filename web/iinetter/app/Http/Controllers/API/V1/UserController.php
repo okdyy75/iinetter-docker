@@ -62,7 +62,7 @@ class UserController extends AppBaseController
         $id = auth('api')->id();
 
         /** @var User $user */
-        $user = $this->userRepository->find($id);
+        $user = $this->userRepository->findById($id);
 
         if (empty($user)) {
             return $this->sendError('User not found');

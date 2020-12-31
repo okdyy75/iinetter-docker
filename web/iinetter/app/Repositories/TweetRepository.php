@@ -47,7 +47,11 @@ class TweetRepository extends BaseRepository
     public function fetchAllByUserId(int $userId): Collection
     {
         return $this->model
-            ->with('user.userProfile', 'refTweet.user.userProfile')
+            ->with([
+                'user.userProfile',
+                'refTweet.user.userProfile',
+                'refTweet.refTweet.user.userProfile'
+            ])
             ->where('user_id', $userId)
             ->orderByDesc('created_at')
             ->get();

@@ -42,6 +42,21 @@ class UserRepository extends BaseRepository
     /**
      * ユーザー名から検索
      *
+     * @param int $id
+     * @return User
+     */
+    public function findById(int $id): User
+    {
+        return $this->model
+            ->with([
+                'userProfile'
+            ])
+            ->find($id);
+    }
+
+    /**
+     * ユーザー名から検索
+     *
      * @param string $name
      * @return User
      */
@@ -51,7 +66,11 @@ class UserRepository extends BaseRepository
             ->with([
                 'userProfile',
                 'tweets' => function ($query) {
-                    $query->with(['user.userProfile', 'refTweet.user.userProfile'])
+                    $query->with([
+                            'user.userProfile',
+                            'refTweet.user.userProfile',
+                            'refTweet.refTweet.user.userProfile',
+                        ])
                         ->orderByDesc('created_at');
                 },
             ])

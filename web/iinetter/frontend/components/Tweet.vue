@@ -14,7 +14,7 @@
         リツイート済み
       </div>
     </div>
-    <div class="row">
+    <div :id="'tweet-id-'+tweet.id" class="row">
       <div class="col-2 text-center">
         <img v-if="tweet.user.user_profile" :src="tweet.user.user_profile.icon_url" class="rounded-circle profileIcon">
         <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
@@ -27,6 +27,16 @@
           <span v-if="tweet.user.user_profile && tweet.user.user_profile.screen_name">
             @{{ tweet.user.user_profile.screen_name }}
           </span>
+        </div>
+        <div v-if="tweetData.tweet_type === 'reply'">
+          <nuxt-link :to="'/' + tweet.user.name + '#tweet-id-'+tweet.ref_tweet_id">
+            <div class="small">
+              RE：{{ tweet.user.name }}
+              <span v-if="tweet.user.user_profile && tweet.user.user_profile.screen_name">
+                @{{ tweet.user.user_profile.screen_name }}
+              </span>
+            </div>
+          </nuxt-link>
         </div>
         <div class="mb-2" style="white-space: pre;" v-text="tweet.tweet_text" />
 
@@ -57,6 +67,7 @@
           <div class="col-3">
             <button
               class="btn rounded-circle tweetButton"
+              @click="replyClick(tweet)"
             >
               <font-awesome-icon :icon="['far', 'comment']" class="" />
             </button>
@@ -67,10 +78,12 @@
               <template #button-content>
                 <font-awesome-icon :icon="['fas', 'retweet']" class="" />
               </template>
-              <b-dropdown-item @click="create({tweet_type: 'retweet', ref_tweet_id: tweet.id, tweet_text: ''})">
+              <b-dropdown-item @click="reTweetClick(tweet)">
                 リツイート
               </b-dropdown-item>
-              <b-dropdown-item>引用リツイート</b-dropdown-item>
+              <b-dropdown-item @click="refReTweetClick(tweet)">
+                引用リツイート
+              </b-dropdown-item>
             </b-dropdown>
             <span class="small">{{ tweet.retweet_count }}</span>
           </div>
@@ -78,7 +91,7 @@
             <button
               class="btn rounded-circle tweetButton"
             >
-              <font-awesome-icon :icon="['far', 'heart']" class="" />
+              <font-awesome-icon :icon="['far', 'heart']" class="" @click="if ($auth.loggedIn) tweet.favorite_count++;update(tweet.id, tweet.favorite_count)" />
             </button>
             <span class="small">{{ tweet.favorite_count }}</span>
           </div>
@@ -100,9 +113,10 @@ export default {
       type: Object,
       required: true
     },
-    refresh: {
+    callback: {
       type: Function,
-      required: true
+      required: false,
+      default: null
     }
   },
   data () {
@@ -111,17 +125,56 @@ export default {
     }
   },
   mounted () {
-    // ただのリツイートはそれをツイート
+    // ただのリツイートはそれを表示
     this.tweet = (this.tweetData.tweet_type === 'retweet' && !this.tweetData.tweet_text) ? this.tweetData.ref_tweet : this.tweetData
   },
   methods: {
-    async create (params) {
-      const response = await this.$axios.post('/api/v1/tweets', params).catch(err => err.response)
+    replyClick (refTweet) {
+      if (!this.$auth.loggedIn) {
+        alert('ログインしてください')
+        return
+      }
+      this.$store.commit('tweetModal/SET_TWEET_TYPE', 'reply')
+      this.$store.commit('tweetModal/SET_TWEET_TEXT', '')
+      this.$store.commit('tweetModal/SET_REF_TWEET', refTweet)
+      this.$bvModal.show('tweet_modal')
+    },
+    async reTweetClick (refTweet) {
+      if (!this.$auth.loggedIn) {
+        alert('ログインしてください')
+        return
+      }
+      this.$store.commit('tweetModal/SET_TWEET_TYPE', 'retweet')
+      this.$store.commit('tweetModal/SET_TWEET_TEXT', '')
+      this.$store.commit('tweetModal/SET_REF_TWEET', refTweet)
+      await this.$store.dispatch('tweetModal/createTweet')
+      if (this.callback) {
+        this.callback()
+      }
+    },
+    refReTweetClick (refTweet) {
+      if (!this.$auth.loggedIn) {
+        alert('ログインしてください')
+        return
+      }
+      this.$store.commit('tweetModal/SET_TWEET_TYPE', 'retweet')
+      this.$store.commit('tweetModal/SET_TWEET_TEXT', '')
+      this.$store.commit('tweetModal/SET_REF_TWEET', refTweet)
+      this.$bvModal.show('tweet_modal')
+    },
+    async update (tweetId, favoriteCount) {
+      if (!this.$auth.loggedIn) {
+        alert('ログインしてください')
+        return
+      }
+      const params = {
+        favorite_count: favoriteCount
+      }
+      const response = await this.$axios.patch('/api/v1/tweets/' + tweetId, params).catch(err => err.response)
       if (response.status !== 200) {
         const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
         alert(errors.join('\n'))
       }
-      this.refresh()
     }
   }
 }

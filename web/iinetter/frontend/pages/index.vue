@@ -12,31 +12,40 @@
         <div class="m-2">
           <form class="form-group">
             <div class="row">
-              <div class="col-12 my-2">
-                <textarea
-                  v-model="form.tweet_text"
-                  :rows="tweetTextRows"
-                  placeholder="いまどうしてる？"
-                  class="form-control border-0 tweetTextbox"
-                  style="resize: none"
-                />
+              <div class="col-2 text-center">
+                <img v-if="this.$auth.user.user_profile" :src="this.$auth.user.user_profile.icon_url" class="rounded-circle profileIcon">
+                <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
               </div>
-            </div>
-            <div class="row">
-              <div class="col-4">
-                <button type="button" class="btn rounded-circle tweetIconButton">
-                  <font-awesome-icon :icon="['fas', 'image']" class="" />
-                </button>
-              </div>
-              <div class="offset-4 col-4 text-center">
-                <button
-                  type="button"
-                  class="btn rounded-pill font-weight-bold tweetButton"
-                  :disabled="form.tweet_text.length === 0"
-                  @click="create"
-                >
-                  ツイートする
-                </button>
+              <div class="col-10 pl-0">
+                <div class="row">
+                  <div class="col-12 my-2">
+                    <textarea
+                      v-model="form.tweetText"
+                      :rows="tweetTextRows"
+                      placeholder="いまどうしてる？"
+                      class="form-control border-0 tweetTextbox"
+                      style="resize: none"
+                    />
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <div class="">
+                    <button type="button" class="btn rounded-circle tweetIconButton">
+                      <font-awesome-icon :icon="['fas', 'image']" class="" />
+                    </button>
+                  </div>
+                  <div class="mx-auto" />
+                  <div class="text-center">
+                    <button
+                      type="button"
+                      class="btn rounded-pill font-weight-bold tweetButton"
+                      :disabled="form.tweetText.length === 0"
+                      @click="create"
+                    >
+                      ツイートする
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
           </form>
@@ -44,18 +53,24 @@
       </div>
       <div class="timeline">
         <div v-for="tweet in tweets" :key="tweet.id" class="border-bottom">
-          <Tweet :tweet-data="tweet" :refresh="refresh" />
+          <Tweet :tweet-data="tweet" :callback="refresh" />
         </div>
       </div>
     </div>
+    <!-- モーダル -->
+    <b-modal id="tweet_modal" :hide-footer="true">
+      <TweetModal :callback="refresh" />
+    </b-modal>
   </div>
 </template>
 
 <script>
+import TweetModal from '@/components/TweetModal'
 import Tweet from '@/components/Tweet'
 
 export default {
   components: {
+    TweetModal,
     Tweet
   },
   async fetch () {
@@ -67,33 +82,33 @@ export default {
   data () {
     return {
       form: {
-        tweet_type: 'tweet',
-        tweet_text: ''
+        tweetType: 'tweet',
+        tweetText: ''
       },
       tweets: []
     }
   },
   computed: {
     tweetTextRows () {
-      return this.form.tweet_text.split('\n').length
+      return this.form.tweetText.split('\n').length
     }
   },
   methods: {
     async create () {
-      const response = await this.$axios.post('/api/v1/tweets', this.form).catch(err => err.response)
+      const params = {
+        tweet_type: this.form.tweetType,
+        tweet_text: this.form.tweetText
+      }
+      const response = await this.$axios.post('/api/v1/tweets', params).catch(err => err.response)
       if (response.status !== 200) {
         const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
         alert(errors.join('\n'))
       }
-      this.form.tweet_text = ''
+      this.form.tweetText = ''
       this.$fetch()
     },
-    async update (tweetId, param) {
-      const response = await this.$axios.patch('/api/v1/tweets/' + tweetId, param).catch(err => err.response)
-      if (response.status !== 200) {
-        const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
-        alert(errors.join('\n'))
-      }
+    refresh () {
+      this.$fetch()
     }
   }
 }
@@ -125,5 +140,10 @@ export default {
 .tweetIconButton:hover {
     color: #1DA1F2;
     background-color: rgba(#1DA1F2, 0.1);
+}
+.profileIcon {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
 }
 </style>

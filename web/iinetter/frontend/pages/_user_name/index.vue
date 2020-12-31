@@ -1,5 +1,5 @@
 <template>
-  <div class="user_name">
+  <div v-if="!$fetchState.pending" class="user_name">
     <div class="position-sticky">
       <div class="sticky-top border-bottom bg-white">
         <div class="row m-2">
@@ -47,7 +47,7 @@
       <div class="timeline">
         <template v-if="tweets.length">
           <div v-for="tweet in tweets" :key="tweet.id" class="border-bottom">
-            <Tweet :tweet-data="tweet" :refresh="refresh" />
+            <Tweet :tweet-data="tweet" :callback="toTop" />
           </div>
         </template>
         <template v-else>
@@ -59,15 +59,21 @@
         </template>
       </div>
     </div>
+    <!-- モーダル -->
+    <b-modal id="tweet_modal" :hide-footer="true">
+      <TweetModal :callback="toTop" />
+    </b-modal>
   </div>
 </template>
 
 <script>
+import TweetModal from '@/components/TweetModal'
 import Tweet from '@/components/Tweet'
 
 export default {
   auth: false,
   components: {
+    TweetModal,
     Tweet
   },
   async fetch () {
@@ -95,8 +101,8 @@ export default {
     }
   },
   methods: {
-    refresh () {
-      this.$fetch()
+    toTop () {
+      this.$router.push('/')
     }
   }
 }

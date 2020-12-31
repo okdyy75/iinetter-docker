@@ -11,13 +11,13 @@
                 </nuxt-link>
               </div>
               <div class="my-3">
-                <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['fas', 'home']" class="fa-lg text-dark" />
+                <nuxt-link :to="'/'" active-class="active" class="text-dark" exact>
+                  <font-awesome-icon :icon="['fas', 'home']" class="fa-lg" />
                 </nuxt-link>
               </div>
               <div class="my-3">
                 <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['fas', 'hashtag']" class="fa-lg text-dark" />
+                  <font-awesome-icon :icon="['fas', 'search']" class="fa-lg text-dark" />
                 </nuxt-link>
               </div>
               <div class="my-3">
@@ -28,16 +28,6 @@
               <div class="my-3">
                 <nuxt-link :to="'/'">
                   <font-awesome-icon :icon="['far', 'envelope']" class="fa-lg text-dark" />
-                </nuxt-link>
-              </div>
-              <div class="my-3">
-                <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['far', 'bookmark']" class="fa-lg text-dark" />
-                </nuxt-link>
-              </div>
-              <div class="my-3">
-                <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['far', 'list-alt']" class="fa-lg text-dark" />
                 </nuxt-link>
               </div>
               <div class="my-3">
@@ -77,6 +67,9 @@ export default {
 </script>
 
 <style scoped>
+.active {
+  color: orangered !important ;
+}
 
 #dropdown /deep/ button {
     border: none;
