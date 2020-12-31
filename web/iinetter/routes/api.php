@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\V1\UserProfileController;
 use App\Http\Controllers\API\V1\TweetController;
+use App\Http\Controllers\API\V1\UserAPIController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,4 +34,7 @@ Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
         Route::patch('tweets/{id}', [TweetController::class, 'update']);
         Route::delete('tweets/{id}', [TweetController::class, 'destroy']);
     });
+
+    Route::get('users', [UserAPIController::class, 'index']);
+    Route::get('users/{name}', [UserAPIController::class, 'show']);
 });

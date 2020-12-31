@@ -9,7 +9,7 @@ use App\Repositories\BaseRepository;
  * Class UserRepository
  * @package App\Repositories
  * @version December 30, 2020, 7:59 am JST
-*/
+ */
 
 class UserRepository extends BaseRepository
 {
@@ -37,5 +37,25 @@ class UserRepository extends BaseRepository
     public function model()
     {
         return User::class;
+    }
+
+    /**
+     * ユーザー名から検索
+     *
+     * @param string $name
+     * @return User
+     */
+    public function findByName(string $name): User
+    {
+        return $this->model
+            ->with([
+                'userProfile',
+                'tweets' => function ($query) {
+                    $query->with(['user.userProfile', 'refTweet.user.userProfile'])
+                        ->orderByDesc('created_at');
+                },
+            ])
+            ->where('name', $name)
+            ->first();
     }
 }
