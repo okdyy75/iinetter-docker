@@ -47,7 +47,7 @@
               </div>
               <div class="my-3">
                 <b-dropdown id="dropdown" dropup no-caret variant="outline">
-                  <template #button-content class="aaaaa">
+                  <template #button-content>
                     <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="fa-lg text-dark" />
                   </template>
                   <b-dropdown-item @click="logout()">
