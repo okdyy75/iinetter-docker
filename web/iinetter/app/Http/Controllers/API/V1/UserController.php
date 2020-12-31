@@ -32,7 +32,7 @@ class UserController extends AppBaseController
      * @SWG\Get(
      *      path="/user",
      *      summary="Get a user.",
-     *      tags={"User"},
+     *      tags={"LoginUser"},
      *      description="Get user",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
@@ -78,7 +78,7 @@ class UserController extends AppBaseController
      * @SWG\Patch(
      *      path="/user",
      *      summary="Update the specified User in storage",
-     *      tags={"User"},
+     *      tags={"LoginUser"},
      *      description="Update User",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
@@ -160,7 +160,7 @@ class UserController extends AppBaseController
      * @SWG\Delete(
      *      path="/user",
      *      summary="Remove the specified User from storage",
-     *      tags={"User"},
+     *      tags={"LoginUser"},
      *      description="Delete User",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},

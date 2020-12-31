@@ -9,7 +9,7 @@
         "/api_token": {
             "put": {
                 "tags": [
-                    "ApiToken"
+                    "Auth"
                 ],
                 "summary": "Update token",
                 "description": "Update token",
@@ -40,7 +40,7 @@
         "/login": {
             "post": {
                 "tags": [
-                    "Login"
+                    "Auth"
                 ],
                 "summary": "Login",
                 "description": "Login",
@@ -82,7 +82,7 @@
         "/register": {
             "post": {
                 "tags": [
-                    "Register"
+                    "Auth"
                 ],
                 "summary": "Store a newly created User in storage",
                 "description": "Store User",
@@ -129,7 +129,7 @@
         "/tweets": {
             "get": {
                 "tags": [
-                    "Tweet"
+                    "LoginUser"
                 ],
                 "summary": "Get a listing of the Tweets.",
                 "description": "Get all Tweets",
@@ -166,7 +166,7 @@
             },
             "post": {
                 "tags": [
-                    "Tweet"
+                    "LoginUser"
                 ],
                 "summary": "Store a newly created Tweet in storage",
                 "description": "Store Tweet",
@@ -213,7 +213,7 @@
         "/tweets/{id}": {
             "delete": {
                 "tags": [
-                    "Tweet"
+                    "LoginUser"
                 ],
                 "summary": "Remove the specified Tweet from storage",
                 "description": "Delete Tweet",
@@ -256,7 +256,7 @@
             },
             "patch": {
                 "tags": [
-                    "Tweet"
+                    "LoginUser"
                 ],
                 "summary": "Update the specified Tweet in storage",
                 "description": "Update Tweet",
@@ -396,7 +396,7 @@
         "/user": {
             "get": {
                 "tags": [
-                    "User"
+                    "LoginUser"
                 ],
                 "summary": "Get a user.",
                 "description": "Get user",
@@ -430,7 +430,7 @@
             },
             "delete": {
                 "tags": [
-                    "User"
+                    "LoginUser"
                 ],
                 "summary": "Remove the specified User from storage",
                 "description": "Delete User",
@@ -464,7 +464,7 @@
             },
             "patch": {
                 "tags": [
-                    "User"
+                    "LoginUser"
                 ],
                 "summary": "Update the specified User in storage",
                 "description": "Update User",

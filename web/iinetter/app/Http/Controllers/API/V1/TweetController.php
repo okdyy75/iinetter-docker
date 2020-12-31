@@ -33,7 +33,7 @@ class TweetController extends AppBaseController
      * @SWG\Get(
      *      path="/tweets",
      *      summary="Get a listing of the Tweets.",
-     *      tags={"Tweet"},
+     *      tags={"LoginUser"},
      *      description="Get all Tweets",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
@@ -75,7 +75,7 @@ class TweetController extends AppBaseController
      * @SWG\Post(
      *      path="/tweets",
      *      summary="Store a newly created Tweet in storage",
-     *      tags={"Tweet"},
+     *      tags={"LoginUser"},
      *      description="Store Tweet",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
@@ -125,7 +125,7 @@ class TweetController extends AppBaseController
      * @SWG\Patch(
      *      path="/tweets/{id}",
      *      summary="Update the specified Tweet in storage",
-     *      tags={"Tweet"},
+     *      tags={"LoginUser"},
      *      description="Update Tweet",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
@@ -201,7 +201,7 @@ class TweetController extends AppBaseController
      * @SWG\Delete(
      *      path="/tweets/{id}",
      *      summary="Remove the specified Tweet from storage",
-     *      tags={"Tweet"},
+     *      tags={"LoginUser"},
      *      description="Delete Tweet",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},

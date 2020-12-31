@@ -27,7 +27,7 @@ class LoginController extends AppBaseController
      * 
      * @SWG\Post(
      *      path="/login",
-     *      tags={"Login"},
+     *      tags={"Auth"},
      *      summary="Login",
      *      description="Login",
      *      produces={"application/json"},

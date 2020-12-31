@@ -10,7 +10,7 @@ class RegisterController extends \App\Http\Controllers\Auth\RegisterController
      * @SWG\Post(
      *      path="/register",
      *      summary="Store a newly created User in storage",
-     *      tags={"Register"},
+     *      tags={"Auth"},
      *      description="Store User",
      *      produces={"application/json"},
      *      @SWG\Parameter(

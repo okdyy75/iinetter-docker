@@ -23,7 +23,7 @@ class ApiTokenController extends Controller
      * @SWG\Put(
      *      path="/api_token",
      *      summary="Update token",
-     *      tags={"ApiToken"},
+     *      tags={"Auth"},
      *      description="Update token",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
