@@ -26,6 +26,7 @@
           <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle mainProfileIcon">
           <nuxt-link :to="'/setup_profile'">
             <button
+              v-if="$auth.user.name === $route.params.user_name"
               type="button"
               class="btn rounded-pill font-weight-bold mr-2 profileSettingButton"
             >
@@ -116,7 +117,7 @@ export default {
   object-fit: cover;
   width: 142px;
   height: 142px;
-  background-color: #C4CFD5;
+  background-color: #FFFFFF;
   border: solid 4px #FFFFFF;
 }
 .profileSettingButton {

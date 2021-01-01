@@ -3,7 +3,7 @@
     <!-- 削除除済みツイート -->
     <div class="row">
       <div class="small offset-1 mb-1 font-weight-bold text-secondary">
-        このツイートは削除済みです
+        引用元のツイートは削除済みです
       </div>
     </div>
   </div>
@@ -19,7 +19,7 @@
         <img v-if="tweet.user.user_profile" :src="tweet.user.user_profile.icon_url" class="rounded-circle profileIcon">
         <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
       </div>
-      <div class="col-10 pl-0">
+      <div :class="['col-10', nestLevel === 1 ? 'pl-0' : '']">
         <div class="d-flex">
           <div>
             <nuxt-link :to="'/'+tweet.user.name">
@@ -35,7 +35,7 @@
               <template #button-content>
                 <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="" />
               </template>
-              <b-dropdown-item @click="tweetDelete(tweet.id)">
+              <b-dropdown-item @click="tweetDelete(tweetData.id)">
                 削除
               </b-dropdown-item>
             </b-dropdown>
@@ -225,8 +225,8 @@ export default {
 }
 
 .profileIcon {
-  width: 50px;
-  height: 50px;
+  width: 42px;
+  height: 42px;
   object-fit: cover;
 }
 
