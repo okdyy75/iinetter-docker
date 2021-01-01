@@ -1,12 +1,5 @@
 <template>
-  <div v-if="!tweet" class="p-2">
-    <!-- 削除除済みツイート -->
-    <div class="row">
-      <div class="small offset-1 mb-1 font-weight-bold text-secondary">
-        引用元のツイートは削除済みです
-      </div>
-    </div>
-  </div>
+  <div v-if="!tweet" />
   <div v-else class="p-2">
     <div v-if="tweetData.tweet_type === 'retweet'" class="row">
       <div class="small offset-1 mb-1 font-weight-bold text-secondary">
