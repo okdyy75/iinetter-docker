@@ -123,8 +123,8 @@ export default {
 .profileSettingButton {
   position: absolute;
   right: 0;
-  color: #1DA1F2;
-  border: 1px solid #1DA1F2
+  color: orangered;
+  border: 1px solid orangered
 }
 
 .tweetIconButton {
@@ -138,8 +138,8 @@ export default {
   box-shadow: none;
 }
 .tweetIconButton:hover {
-  color: #1DA1F2;
-  background-color: rgba(29, 161, 242, 0.1);
+  color: orangered;
+  background: rgb(255, 69, 0, 0.1);
 }
 
 </style>

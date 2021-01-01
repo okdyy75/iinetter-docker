@@ -210,8 +210,8 @@ export default {
     box-shadow: none;
 }
 .tweetIconButton:hover, #retweet_dropdown /deep/ button:hover, #tweet_other_dropdown /deep/ button:hover {
-    color: #1DA1F2;
-    background-color: rgba(29, 161, 242, 0.1);
+    color: orangered;
+    background: rgb(255, 69, 0, 0.1);
 }
 
 .profileIcon {

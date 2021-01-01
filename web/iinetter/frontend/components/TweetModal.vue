@@ -129,7 +129,7 @@ export default {
 }
 .tweetButton {
   color: white;
-  background: #1DA1F2
+  background: orangered
 }
 .tweetIconButton {
   border: none;
@@ -142,8 +142,8 @@ export default {
   box-shadow: none;
 }
 .tweetIconButton:hover {
-  color: #1DA1F2;
-  background-color: rgba(29, 161, 242, 0.1);
+  color: orangered;
+  background: rgb(255, 69, 0, 0.1);
 }
 .profileIcon {
   width: 42px;

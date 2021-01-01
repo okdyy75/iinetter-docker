@@ -16,7 +16,7 @@
           <button
             type="submit"
             class="btn rounded-pill font-weight-bold w-100 p-2"
-            style="color: white;background-color: #1DA1F2"
+            style="color: white;background-color: orangered"
           >
             ログイン
           </button>
