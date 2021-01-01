@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="row">
-      <div class="col-6 mx-auto text-center my-5">
+      <div class="col-lg-6 mx-auto text-center my-5">
         <font-awesome-icon :icon="['fab', 'twitter']" class="fa-2x" style="color: orangered;" />
         <h1 class="h5 font-weight-bold pt-4">
           ログイン

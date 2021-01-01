@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-6 mx-auto text-center my-5">
+      <div class="col-lg-6 mx-auto text-center my-5">
         <font-awesome-icon :icon="['fab', 'twitter']" class="fa-2x" style="color: orangered;" />
         <h1 class="h5 font-weight-bold pt-4">
           アカウントを作成
@@ -21,7 +21,7 @@
           </div>
           <button
             type="submit"
-            class="btn rounded-pill w-100 p-2"
+            class="btn rounded-pill font-weight-bold w-100 p-2"
             style="color: white;background-color: #1DA1F2"
           >
             アカウント作成
