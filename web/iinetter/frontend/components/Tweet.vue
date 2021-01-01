@@ -34,7 +34,7 @@
             </b-dropdown>
           </div>
         </div>
-        <div v-if="tweetData.tweet_type === 'reply'">
+        <div v-if="tweetData.tweet_type === 'reply' && tweet.ref_tweet">
           <nuxt-link :to="'/' + tweet.ref_tweet.user.name + '#tweet-id-'+tweet.ref_tweet.id">
             <div class="small">
               RE：{{ tweet.user.name }}
@@ -128,10 +128,7 @@ export default {
   computed: {
     ...mapState({
       tweetModalResponse: state => state.tweetModal.response
-    }),
-    tweetTextRows () {
-      return this.tweetText.split('\n').length
-    }
+    })
   },
   mounted () {
     // ただのリツイートはそれを表示
