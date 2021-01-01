@@ -51,7 +51,7 @@
             </div>
           </nuxt-link>
         </div>
-        <div class="mb-2" style="white-space: pre;" v-text="tweet.tweet_text" />
+        <div class="mb-2" style="white-space: pre-wrap;" v-text="tweet.tweet_text" />
 
         <!-- 引用リツイート -->
         <template v-if="tweet.tweet_type === 'retweet' && nestLevel === 1">
