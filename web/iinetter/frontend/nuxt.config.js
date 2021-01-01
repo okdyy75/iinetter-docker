@@ -3,10 +3,10 @@ const env = require(`./env.${environment}.js`)
 
 export default {
   // Disable server-side rendering (https://go.nuxtjs.dev/ssr-mode)
-  ssr: false,
+  ssr: true,
 
   // Target (https://go.nuxtjs.dev/config-target)
-  target: 'static',
+  target: 'server',
 
   env: {
     ...env
@@ -65,6 +65,10 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    babel: {
+      babelrc: false,
+      compact: false
+    }
   },
   auth: {
     redirect: {
