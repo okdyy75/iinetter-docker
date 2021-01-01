@@ -1,9 +1,12 @@
 <template>
-  <form class="form-group">
+  <div v-if="!this.$auth.loggedIn">
+    ログインしてください
+  </div>
+  <form v-else class="form-group">
     <div v-if="tweetType === 'reply' && refTweet" class="row">
       <div class="col-12 pb-3">
         <div class="border-bottom">
-          <Tweet :tweet-data="refTweet" :callback="refresh" />
+          <Tweet :tweet-data="refTweet" :nest-level="2" />
         </div>
       </div>
     </div>
@@ -24,29 +27,17 @@
             />
           </div>
         </div>
+
         <!-- 引用リツイート -->
-        <div v-if="tweetType === 'retweet' && refTweet" class="my-2 p-2 border" style="border-radius: 16px;">
-          <div class="row">
-            <div class="col-2 text-center">
-              <img v-if="refTweet.user.user_profile" :src="refTweet.user.user_profile.icon_url" class="rounded-circle profileIcon">
-              <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
-            </div>
-            <div class="col-10 pl-0">
-              <div>
-                <nuxt-link :to="'/'+refTweet.user.name">
-                  {{ refTweet.user.name }}
-                </nuxt-link>
-                <span v-if="refTweet.user.user_profile && refTweet.user.user_profile.screen_name">
-                  @{{ refTweet.user.user_profile.screen_name }}
-                </span>
-              </div>
-              <div class="mb-2" style="white-space: pre;" v-text="refTweet.tweet_text" />
-            </div>
+        <template v-if="tweetType === 'retweet'">
+          <div v-if="refTweet" class="my-2 p-2 border" style="border-radius: 16px;">
+            <Tweet :tweet-data="refTweet" :nest-level="2" />
           </div>
-        </div>
+        </template>
+
         <div class="d-flex">
           <div class="">
-            <button type="button" class="btn rounded-circle tweetIconButton">
+            <button type="button" class="btn rounded-circle tweetIconButton" @click="selectImageClick()">
               <font-awesome-icon :icon="['fas', 'image']" class="" />
             </button>
           </div>
@@ -90,7 +81,8 @@ export default {
   computed: {
     ...mapState({
       tweetType: state => state.tweetModal.tweetType,
-      refTweet: state => state.tweetModal.refTweet
+      refTweet: state => state.tweetModal.refTweet,
+      tweetModalResponse: state => state.tweetModal.response
     }),
     tweetTextRows () {
       return this.tweetText.split('\n').length
@@ -100,13 +92,31 @@ export default {
     ...mapActions({
       createTweet: 'tweetModal/createTweet'
     }),
+    selectImageClick () {
+      alert('未実装です')
+    },
     async create () {
       this.$store.commit('tweetModal/SET_TWEET_TEXT', this.tweetText)
       await this.createTweet()
-      if (this.callback) {
-        this.callback()
+      this.alertErrorMessage(this.tweetModalResponse)
+      if (this.tweetModalResponse.status === 200) {
+        if (this.callback) {
+          this.callback()
+        }
+        this.$store.commit('tweetModal/SET_TWEET_TEXT', '')
+        this.$store.commit('tweetModal/SET_REF_TWEET', {})
+        this.$bvModal.hide('tweet_modal')
       }
-      this.$bvModal.hide('tweet_modal')
+    },
+    alertErrorMessage (response) {
+      if (response.status === 401) {
+        alert('ログインしてください')
+      } else if (response.status === 403) {
+        alert('権限がありません')
+      } else if (response.status === 422) {
+        const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
+        alert(errors.join('\n'))
+      }
     }
   }
 }
@@ -122,17 +132,18 @@ export default {
   background: #1DA1F2
 }
 .tweetIconButton {
-    border: none;
-    width: 24px;
-    height: 24px;
-    padding: 0;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
 }
 .tweetIconButton:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 .tweetIconButton:hover {
-    color: #1DA1F2;
-    background-color: rgba(#1DA1F2, 0.1);
+  color: #1DA1F2;
+  background-color: rgba(29, 161, 242, 0.1);
 }
 .profileIcon {
   width: 50px;

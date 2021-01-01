@@ -47,7 +47,7 @@
       <div class="timeline">
         <template v-if="tweets.length">
           <div v-for="tweet in tweets" :key="tweet.id" class="border-bottom">
-            <Tweet :tweet-data="tweet" :callback="toTop" />
+            <Tweet :tweet-data="tweet" :nest-level="1" :callback="toTop" />
           </div>
         </template>
         <template v-else>
@@ -127,17 +127,18 @@ export default {
 }
 
 .tweetIconButton {
-    border: none;
-    width: 24px;
-    height: 24px;
-    padding: 0;
+  border: none;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
 }
 .tweetIconButton:focus {
-    box-shadow: none;
+  box-shadow: none;
 }
 .tweetIconButton:hover {
-    color: #1DA1F2;
-    background-color: rgba(#1DA1F2, 0.1);
+  color: #1DA1F2;
+  background-color: rgba(29, 161, 242, 0.1);
 }
 
 </style>

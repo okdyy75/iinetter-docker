@@ -30,7 +30,7 @@
                 </div>
                 <div class="d-flex">
                   <div class="">
-                    <button type="button" class="btn rounded-circle tweetIconButton">
+                    <button type="button" class="btn rounded-circle tweetIconButton" @click="selectImageClick()">
                       <font-awesome-icon :icon="['fas', 'image']" class="" />
                     </button>
                   </div>
@@ -53,7 +53,7 @@
       </div>
       <div class="timeline">
         <div v-for="tweet in tweets" :key="tweet.id" class="border-bottom">
-          <Tweet :tweet-data="tweet" :callback="refresh" />
+          <Tweet :tweet-data="tweet" :nest-level="1" :callback="refresh" />
         </div>
       </div>
     </div>
@@ -94,6 +94,9 @@ export default {
     }
   },
   methods: {
+    selectImageClick () {
+      alert('未実装です')
+    },
     async create () {
       const params = {
         tweet_type: this.form.tweetType,
@@ -103,9 +106,10 @@ export default {
       if (response.status !== 200) {
         const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
         alert(errors.join('\n'))
+      } else {
+        this.form.tweetText = ''
+        this.$fetch()
       }
-      this.form.tweetText = ''
-      this.$fetch()
     },
     refresh () {
       this.$fetch()
@@ -139,7 +143,7 @@ export default {
 }
 .tweetIconButton:hover {
     color: #1DA1F2;
-    background-color: rgba(#1DA1F2, 0.1);
+    background-color: rgba(29, 161, 242, 0.1);
 }
 .profileIcon {
   width: 50px;

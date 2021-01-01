@@ -7,38 +7,50 @@
             <div class="position-fixed text-center" style="z-index: 2;">
               <div class="my-3">
                 <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['fab', 'twitter']" class="fa-lg" style="color: orangered;" />
+                  <button type="button" class="btn rounded-circle tweetIconButton" style="color: orangered;">
+                    <font-awesome-icon :icon="['fab', 'twitter']" class="fa-lg" />
+                  </button>
                 </nuxt-link>
               </div>
               <div class="my-3">
-                <nuxt-link :to="'/'" active-class="active" class="text-dark" exact>
-                  <font-awesome-icon :icon="['fas', 'home']" class="fa-lg" />
-                </nuxt-link>
-              </div>
-              <div class="my-3">
-                <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['fas', 'search']" class="fa-lg text-dark" />
-                </nuxt-link>
-              </div>
-              <div class="my-3">
-                <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['fas', 'bell']" class="fa-lg text-dark" />
+                <nuxt-link :to="'/'" active-class="active" exact>
+                  <button type="button" class="btn rounded-circle tweetIconButton">
+                    <font-awesome-icon :icon="['fas', 'home']" class="fa-lg" />
+                  </button>
                 </nuxt-link>
               </div>
               <div class="my-3">
                 <nuxt-link :to="'/'">
-                  <font-awesome-icon :icon="['far', 'envelope']" class="fa-lg text-dark" />
+                  <button type="button" class="btn rounded-circle tweetIconButton">
+                    <font-awesome-icon :icon="['fas', 'search']" class="fa-lg" />
+                  </button>
+                </nuxt-link>
+              </div>
+              <div class="my-3">
+                <nuxt-link :to="'/'">
+                  <button type="button" class="btn rounded-circle tweetIconButton">
+                    <font-awesome-icon :icon="['fas', 'bell']" class="fa-lg" />
+                  </button>
+                </nuxt-link>
+              </div>
+              <div class="my-3">
+                <nuxt-link :to="'/'">
+                  <button type="button" class="btn rounded-circle tweetIconButton">
+                    <font-awesome-icon :icon="['far', 'envelope']" class="fa-lg" />
+                  </button>
                 </nuxt-link>
               </div>
               <div class="my-3">
                 <nuxt-link :to="'/setup_profile'">
-                  <font-awesome-icon :icon="['far', 'user']" class="fa-lg text-dark" />
+                  <button type="button" class="btn rounded-circle tweetIconButton">
+                    <font-awesome-icon :icon="['far', 'user']" class="fa-lg" />
+                  </button>
                 </nuxt-link>
               </div>
               <div class="my-3">
-                <b-dropdown id="dropdown" dropup no-caret variant="outline">
+                <b-dropdown id="left_menu_dropdown" dropup no-caret variant="outline">
                   <template #button-content>
-                    <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="fa-lg text-dark" />
+                    <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="fa-lg" />
                   </template>
                   <b-dropdown-item @click="logout()">
                     ログアウト
@@ -70,11 +82,18 @@ export default {
 .active {
   color: orangered !important ;
 }
-
-#dropdown /deep/ button {
+.tweetIconButton, #left_menu_dropdown /deep/ button {
     border: none;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
 }
-#dropdown /deep/ button:focus {
+.tweetIconButton:focus, #left_menu_dropdown /deep/ button:focus {
     box-shadow: none;
+}
+.tweetIconButton:hover, #left_menu_dropdown /deep/ button:hover {
+    color: orangered;
+    background: rgb(255, 69, 0, 0.1);
 }
 </style>

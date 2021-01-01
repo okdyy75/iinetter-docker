@@ -146,6 +146,9 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'tweet_type' => 'ツイート種類',
+        'tweet_text' => 'ツイート本文',
+    ],
 
 ];

@@ -1,7 +1,8 @@
 export const state = () => ({
   tweetType: '',
   tweetText: '',
-  refTweet: {}
+  refTweet: {},
+  response: {}
 })
 
 export const mutations = {
@@ -13,6 +14,9 @@ export const mutations = {
   },
   SET_REF_TWEET (state, data) {
     state.refTweet = data
+  },
+  SET_RESPONSE (state, data) {
+    state.response = data
   }
 }
 
@@ -26,13 +30,6 @@ export const actions = {
       params.ref_tweet_id = state.refTweet.id
     }
     const response = await this.$axios.post('/api/v1/tweets', params).catch(err => err.response)
-    if (response.status !== 200) {
-      const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
-      alert(errors.join('\n'))
-    } else {
-      commit('SET_TWEET_TYPE', '')
-      commit('SET_TWEET_TEXT', '')
-      commit('SET_REF_TWEET', {})
-    }
+    commit('SET_RESPONSE', response)
   }
 }
