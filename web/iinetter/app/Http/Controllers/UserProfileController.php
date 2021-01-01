@@ -58,10 +58,10 @@ class UserProfileController extends AppBaseController
         $input['user_id'] = auth('web')->id();
 
         if (isset($input['icon'])) {
-            $input['icon'] = $request->file('icon')->store('images/icons', 'public');
+            $input['icon'] = base64_encode($request->file('icon')->getContent());
         }
         if (isset($input['header_image'])) {
-            $input['header_image'] = $request->file('header_image')->store('images/header_images', 'public');
+            $input['header_image'] = base64_encode($request->file('header_image')->getContent());
         }
 
         $userProfile = $this->userProfileRepository->create($input);
@@ -131,10 +131,10 @@ class UserProfileController extends AppBaseController
 
         $input = $request->all();
         if (isset($input['icon'])) {
-            $input['icon'] = $request->file('icon')->store('images/icons', 'public');
+            $input['icon'] = base64_encode($request->file('icon')->getContent());
         }
         if (isset($input['header_image'])) {
-            $input['header_image'] = $request->file('header_image')->store('images/header_images', 'public');
+            $input['header_image'] = base64_encode($request->file('header_image')->getContent());
         }
 
         $userProfile = $this->userProfileRepository->update($input, $id);

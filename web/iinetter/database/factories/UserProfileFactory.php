@@ -30,8 +30,6 @@ class UserProfileFactory extends Factory
             'description' => $this->faker->word,
             'location' => $this->faker->word,
             'url' => $this->faker->url,
-            'icon' => $this->faker->imageUrl,
-            'header_image' => $this->faker->imageUrl,
         ];
     }
 }

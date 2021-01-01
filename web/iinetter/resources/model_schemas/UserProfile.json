@@ -73,9 +73,9 @@
     },
     {
         "name": "icon",
-        "dbType": "text:nullable",
+        "dbType": "binary:nullable",
         "htmlType": "file",
-        "validations": "nullable|file|image",
+        "validations": "nullable|file|image|max:20000",
         "searchable": true,
         "fillable": true,
         "primary": false,
@@ -85,9 +85,9 @@
     },
     {
         "name": "header_image",
-        "dbType": "text:nullable",
+        "dbType": "binary:nullable",
         "htmlType": "file",
-        "validations": "nullable|file|image",
+        "validations": "nullable|file|image|max:20000",
         "searchable": true,
         "fillable": true,
         "primary": false,

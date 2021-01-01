@@ -6,11 +6,7 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel">
             <div class="pull-left image">
-                @if(! empty(($icon = Auth::user()->userProfile->icon ?? null)))
-                    <img src="{{ asset('storage/'.$icon) }}" alt="User Image"/>
-                @else
-                    <img src="http://placehold.jp/30/FFFFFF/333333/100x100.png?text={{ Auth::user()->name }}" alt="User Image"/>
-                @endif
+                <img src="{{ Auth::user()->userProfile->icon_url ?? '' }}" onerror="this.src='/images/user_icon_default.png'" alt="User Image" style="object-fit: cover;" />
             </div>
             <div class="pull-left info">
                 @if (Auth::guest())

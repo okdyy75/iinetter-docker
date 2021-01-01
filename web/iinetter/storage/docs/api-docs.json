@@ -530,7 +530,7 @@
         "/user_profile": {
             "get": {
                 "tags": [
-                    "UserProfile"
+                    "LoginUser"
                 ],
                 "summary": "Display the specified UserProfile",
                 "description": "Get UserProfile",
@@ -564,7 +564,7 @@
             },
             "post": {
                 "tags": [
-                    "UserProfile"
+                    "LoginUser"
                 ],
                 "summary": "Store a newly created UserProfile in storage",
                 "description": "Store UserProfile",
@@ -786,11 +786,13 @@
                 },
                 "icon": {
                     "description": "icon",
-                    "type": "string"
+                    "type": "string",
+                    "format": "binary"
                 },
                 "header_image": {
                     "description": "header_image",
-                    "type": "string"
+                    "type": "string",
+                    "format": "binary"
                 },
                 "created_at": {
                     "description": "created_at",

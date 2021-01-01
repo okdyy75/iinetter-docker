@@ -45,12 +45,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
  *      @SWG\Property(
  *          property="icon",
  *          description="icon",
- *          type="string"
+ *          type="string",
+ *          format="binary"
  *      ),
  *      @SWG\Property(
  *          property="header_image",
  *          description="header_image",
- *          type="string"
+ *          type="string",
+ *          format="binary"
  *      ),
  *      @SWG\Property(
  *          property="created_at",
@@ -100,9 +102,7 @@ class UserProfile extends Model
         'screen_name' => 'string',
         'description' => 'string',
         'location' => 'string',
-        'url' => 'string',
-        'icon' => 'string',
-        'header_image' => 'string'
+        'url' => 'string'
     ];
 
     /**
@@ -133,11 +133,11 @@ class UserProfile extends Model
 
     public function getIconUrlAttribute()
     {
-        return isset($this->icon) ? asset('storage/'.$this->icon) : config('app.url') . '/images/user_icon_default.png';
+        return isset($this->icon) ? 'data:image;base64,' . $this->icon : config('app.url') . '/images/user_icon_default.png';
     }
 
     public function getHeaderImageUrlAttribute()
     {
-        return isset($this->header_image) ? asset('storage/'.$this->header_image) : config('app.url') . '/images/user_header_image_default.png';
+        return isset($this->header_image) ? 'data:image;base64,' . $this->header_image : config('app.url') . '/images/user_header_image_default.png';
     }
 }

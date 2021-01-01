@@ -32,7 +32,7 @@ class UserProfileController extends AppBaseController
      * @SWG\Get(
      *      path="/user_profile",
      *      summary="Display the specified UserProfile",
-     *      tags={"UserProfile"},
+     *      tags={"LoginUser"},
      *      description="Get UserProfile",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
@@ -78,7 +78,7 @@ class UserProfileController extends AppBaseController
      * @SWG\Post(
      *      path="/user_profile",
      *      summary="Store a newly created UserProfile in storage",
-     *      tags={"UserProfile"},
+     *      tags={"LoginUser"},
      *      description="Store UserProfile",
      *      produces={"application/json"},
      *      security={{"apiToken":{}}},
@@ -151,10 +151,10 @@ class UserProfileController extends AppBaseController
         $input['user_id'] = auth('api')->id();
 
         if (isset($input['icon'])) {
-            $input['icon'] = $request->file('icon')->store('images/icons', 'public');
+            $input['icon'] = base64_encode($request->file('icon')->getContent());
         }
         if (isset($input['header_image'])) {
-            $input['header_image'] = $request->file('header_image')->store('images/header_images', 'public');
+            $input['header_image'] = base64_encode($request->file('header_image')->getContent());
         }
 
         $id = auth('api')->user()->userProfile->id ?? null;

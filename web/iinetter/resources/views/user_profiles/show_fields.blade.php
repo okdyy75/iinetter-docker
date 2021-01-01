@@ -37,13 +37,13 @@
 <!-- Icon Field -->
 <div class="form-group">
     {!! Form::label('icon', 'Icon:') !!}
-    <p><img src="{{ asset('storage/'.$userProfile->icon) }}"></p>
+    <p><img src="{{ $userProfile->icon_url }}"></p>
 </div>
 
 <!-- Header Image Field -->
 <div class="form-group">
     {!! Form::label('header_image', 'Header Image:') !!}
-    <p><img src="{{ asset('storage/'.$userProfile->header_image) }}"></p>
+    <p><img src="{{ $userProfile->header_image_url }}"></p>
 </div>
 
 <!-- Created At Field -->
