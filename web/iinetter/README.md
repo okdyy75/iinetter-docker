@@ -53,7 +53,7 @@ vendor/infyomlabs/laravel-generator/src/Common/GeneratorFieldRelation.php
 
 
 ### テーブル設計
-
+```
 users
 ------------------
 id
@@ -87,7 +87,7 @@ reply_count
 retweet_count
 favorite_count
 created_at
-
+```
 
 
 ## フロントエンド
@@ -95,7 +95,7 @@ created_at
 - typescript導入したが、補完が上手くいかなかったのでほぼ使用せず
 
 nuxt作成時
-｀｀｀
+```
 npm init nuxt-app frontend
 
 create-nuxt-app v3.4.0
@@ -113,7 +113,7 @@ create-nuxt-app v3.4.0
 ? Continuous integration: GitHub Actions (GitHub only)
 ? What is your GitHub username? okdyy75
 ? Version control system: None
-｀｀｀
+```
 
 
 以下初期README
