@@ -1,6 +1,6 @@
 <template>
   <div class="index">
-    <div class="sticky-top border-bottom bg-white">
+    <div class="title sticky-top border-bottom bg-white">
       <div class="p-2">
         <h1 class="m-0 h5 font-weight-bold">
           ホーム
@@ -117,6 +117,16 @@ export default {
 </script>
 
 <style scoped>
+@media screen and (max-width: 576px){
+  .index {
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .title {
+    position: fixed;
+    width: 100%;
+  }
+}
 .tweetBox {
     border-width: 10px !important;
 }

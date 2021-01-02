@@ -1,6 +1,6 @@
 <template>
   <div v-if="!$fetchState.pending" class="user_name">
-    <div class="sticky-top border-bottom bg-white">
+    <div class="title sticky-top border-bottom bg-white">
       <div class="row m-2">
         <div class="d-flex">
           <button type="button" class="btn rounded-circle align-self-center tweetIconButton" @click="$router.go(-1)">
@@ -108,7 +108,16 @@ export default {
 </script>
 
 <style scoped>
-
+@media screen and (max-width: 576px){
+  .user_name {
+    overflow: hidden;
+    margin-top: 40px;
+  }
+  .title {
+    position: fixed;
+    width: 100%;
+  }
+}
 .mainProfileIcon {
   position: relative;
   top: -88px;
