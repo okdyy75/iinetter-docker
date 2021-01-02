@@ -1,60 +1,60 @@
 <template>
   <div class="index">
-      <div class="sticky-top border-bottom bg-white">
-        <div class="p-2">
-          <h1 class="m-0 h5 font-weight-bold">
-            ホーム
-          </h1>
-        </div>
+    <div class="sticky-top border-bottom bg-white">
+      <div class="p-2">
+        <h1 class="m-0 h5 font-weight-bold">
+          ホーム
+        </h1>
       </div>
-      <div class="border-bottom tweetBox">
-        <div class="m-2">
-          <form class="form-group">
-            <div class="row">
-              <div class="col-2 text-center">
-                <img v-if="this.$auth.user.user_profile" :src="this.$auth.user.user_profile.icon_url" class="rounded-circle profileIcon">
-                <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
-              </div>
-              <div class="col-10 pl-0">
-                <div class="row">
-                  <div class="col-12 my-2">
-                    <textarea
-                      v-model="form.tweetText"
-                      :rows="tweetTextRows"
-                      placeholder="いまどうしてる？"
-                      class="form-control border-0 tweetTextbox"
-                      style="resize: none"
-                    />
-                  </div>
+    </div>
+    <div class="border-bottom tweetBox">
+      <div class="m-2">
+        <form class="form-group">
+          <div class="row">
+            <div class="col-2 text-center">
+              <img v-if="this.$auth.user.user_profile" :src="this.$auth.user.user_profile.icon_url" class="rounded-circle profileIcon">
+              <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
+            </div>
+            <div class="col-10 pl-0">
+              <div class="row">
+                <div class="col-12 my-2">
+                  <textarea
+                    v-model="form.tweetText"
+                    :rows="tweetTextRows"
+                    placeholder="いまどうしてる？"
+                    class="form-control border-0 tweetTextbox"
+                    style="resize: none"
+                  />
                 </div>
-                <div class="d-flex">
-                  <div class="">
-                    <button type="button" class="btn rounded-circle tweetIconButton" @click="selectImageClick()">
-                      <font-awesome-icon :icon="['fas', 'image']" class="" />
-                    </button>
-                  </div>
-                  <div class="mx-auto" />
-                  <div class="text-center">
-                    <button
-                      type="button"
-                      class="btn rounded-pill font-weight-bold tweetButton"
-                      :disabled="form.tweetText.length === 0"
-                      @click="create"
-                    >
-                      ツイートする
-                    </button>
-                  </div>
+              </div>
+              <div class="d-flex">
+                <div class="">
+                  <button type="button" class="btn rounded-circle tweetIconButton" @click="selectImageClick()">
+                    <font-awesome-icon :icon="['fas', 'image']" class="" />
+                  </button>
+                </div>
+                <div class="mx-auto" />
+                <div class="text-center">
+                  <button
+                    type="button"
+                    class="btn rounded-pill font-weight-bold tweetButton"
+                    :disabled="form.tweetText.length === 0"
+                    @click="create"
+                  >
+                    ツイートする
+                  </button>
                 </div>
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
-      <div class="timeline">
-        <div v-for="tweet in tweets" :key="tweet.id" class="border-bottom">
-          <Tweet :tweet-data="tweet" :nest-level="1" :callback="refresh" />
-        </div>
+    </div>
+    <div class="timeline">
+      <div v-for="tweet in tweets" :key="tweet.id">
+        <Tweet :tweet-data="tweet" :nest-level="1" :inject-class="['border-bottom']" :callback="refresh" />
       </div>
+    </div>
     <!-- モーダル -->
     <b-modal id="tweet_modal" :hide-footer="true">
       <TweetModal :callback="refresh" />

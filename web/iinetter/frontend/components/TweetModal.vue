@@ -5,9 +5,7 @@
   <form v-else class="form-group">
     <div v-if="tweetType === 'reply' && refTweet" class="row">
       <div class="col-12 pb-3">
-        <div class="border-bottom">
-          <Tweet :tweet-data="refTweet" :nest-level="2" />
-        </div>
+        <Tweet :inject-class="['border-bottom']" :tweet-data="refTweet" :nest-level="2" />
       </div>
     </div>
     <div class="row">

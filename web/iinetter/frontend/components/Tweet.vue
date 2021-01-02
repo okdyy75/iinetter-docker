@@ -1,94 +1,95 @@
 <template>
-  <div v-if="!tweet" />
-  <div v-else class="p-2">
-    <div v-if="tweetData.tweet_type === 'retweet'" class="row">
-      <div class="small offset-1 mb-1 font-weight-bold text-secondary">
-        <font-awesome-icon :icon="['fas', 'retweet']" />
-        リツイート済み
-      </div>
-    </div>
-    <div :id="'tweet-id-'+tweet.id" class="row">
-      <div class="col-2 text-center">
-        <img v-if="tweet.user.user_profile" :src="tweet.user.user_profile.icon_url" class="rounded-circle profileIcon">
-        <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
-      </div>
-      <div :class="['col-10', nestLevel === 1 ? 'pl-0' : '']">
-        <div class="d-flex">
-          <div>
-            <nuxt-link :to="'/'+tweet.user.name">
-              {{ tweet.user.name }}
-            </nuxt-link>
-            <span v-if="tweet.user.user_profile && tweet.user.user_profile.screen_name">
-              @{{ tweet.user.user_profile.screen_name }}
-            </span>
-          </div>
-          <div class="mx-auto" />
-          <div v-if="nestLevel === 1">
-            <b-dropdown id="tweet_other_dropdown" dropup no-caret variant="outline">
-              <template #button-content>
-                <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="" />
-              </template>
-              <b-dropdown-item @click="tweetDelete(tweetData.id)">
-                削除
-              </b-dropdown-item>
-            </b-dropdown>
-          </div>
+  <div v-if="tweet" :class="injectClass">
+    <div class="p-2">
+      <div v-if="tweetData.tweet_type === 'retweet'" class="row">
+        <div class="small offset-1 mb-1 font-weight-bold text-secondary">
+          <font-awesome-icon :icon="['fas', 'retweet']" />
+          リツイート済み
         </div>
-        <div v-if="tweetData.tweet_type === 'reply' && tweet.ref_tweet">
-          <nuxt-link :to="'/' + tweet.ref_tweet.user.name + '#tweet-id-'+tweet.ref_tweet.id">
-            <div class="small">
-              RE：{{ tweet.user.name }}
+      </div>
+      <div :id="'tweet-id-'+tweet.id" class="row">
+        <div class="col-2 text-center">
+          <img v-if="tweet.user.user_profile" :src="tweet.user.user_profile.icon_url" class="rounded-circle profileIcon">
+          <img v-else src="http://localhost/images/user_icon_default.png" class="rounded-circle profileIcon">
+        </div>
+        <div :class="['col-10', nestLevel === 1 ? 'pl-0' : '']">
+          <div class="d-flex">
+            <div>
+              <nuxt-link :to="'/'+tweet.user.name">
+                {{ tweet.user.name }}
+              </nuxt-link>
               <span v-if="tweet.user.user_profile && tweet.user.user_profile.screen_name">
                 @{{ tweet.user.user_profile.screen_name }}
               </span>
             </div>
-          </nuxt-link>
-        </div>
-        <div class="mb-2" style="white-space: pre-wrap;" v-text="tweet.tweet_text" />
+            <div class="mx-auto" />
+            <div v-if="nestLevel === 1">
+              <b-dropdown id="tweet_other_dropdown" dropup no-caret variant="outline">
+                <template #button-content>
+                  <font-awesome-icon :icon="['fas', 'ellipsis-h']" class="" />
+                </template>
+                <b-dropdown-item @click="tweetDelete(tweetData.id)">
+                  削除
+                </b-dropdown-item>
+              </b-dropdown>
+            </div>
+          </div>
+          <div v-if="tweetData.tweet_type === 'reply' && tweet.ref_tweet">
+            <nuxt-link :to="'/' + tweet.ref_tweet.user.name + '#tweet-id-'+tweet.ref_tweet.id">
+              <div class="small">
+                RE：{{ tweet.user.name }}
+                <span v-if="tweet.user.user_profile && tweet.user.user_profile.screen_name">
+                  @{{ tweet.user.user_profile.screen_name }}
+                </span>
+              </div>
+            </nuxt-link>
+          </div>
+          <div class="mb-2" style="white-space: pre-wrap;" v-text="tweet.tweet_text" />
 
-        <!-- 引用リツイート -->
-        <template v-if="tweet.tweet_type === 'retweet' && nestLevel === 1">
-          <div v-if="tweet.ref_tweet" class="my-2 p-2 border" style="border-radius: 16px;">
-            <Tweet :tweet-data="tweet.ref_tweet" :nest-level="nestLevel + 1" />
-          </div>
-        </template>
+          <!-- 引用リツイート -->
+          <template v-if="tweet.tweet_type === 'retweet' && nestLevel === 1">
+            <div v-if="tweet.ref_tweet" class="my-2 p-2 border" style="border-radius: 16px;">
+              <Tweet :tweet-data="tweet.ref_tweet" :nest-level="nestLevel + 1" />
+            </div>
+          </template>
 
-        <div v-if="nestLevel === 1" class="row">
-          <div class="col-3">
-            <button
-              class="btn rounded-circle tweetIconButton"
-              @click="replyClick(tweet)"
-            >
-              <font-awesome-icon :icon="['far', 'comment']" class="" />
-            </button>
-            <span class="small">{{ tweet.reply_count }}</span>
-          </div>
-          <div class="col-3">
-            <b-dropdown id="retweet_dropdown" dropup no-caret variant="outline">
-              <template #button-content>
-                <font-awesome-icon :icon="['fas', 'retweet']" class="" />
-              </template>
-              <b-dropdown-item @click="reTweetClick(tweet)">
-                リツイート
-              </b-dropdown-item>
-              <b-dropdown-item @click="refReTweetClick(tweet)">
-                引用リツイート
-              </b-dropdown-item>
-            </b-dropdown>
-            <span class="small">{{ tweet.retweet_count }}</span>
-          </div>
-          <div class="col-3">
-            <button
-              class="btn rounded-circle tweetIconButton"
-            >
+          <div v-if="nestLevel === 1" class="row">
+            <div class="col-3">
+              <button
+                class="btn rounded-circle tweetIconButton"
+                @click="replyClick(tweet)"
+              >
+                <font-awesome-icon :icon="['far', 'comment']" class="" />
+              </button>
+              <span class="small">{{ tweet.reply_count }}</span>
+            </div>
+            <div class="col-3">
+              <b-dropdown id="retweet_dropdown" dropup no-caret variant="outline">
+                <template #button-content>
+                  <font-awesome-icon :icon="['fas', 'retweet']" class="" />
+                </template>
+                <b-dropdown-item @click="reTweetClick(tweet)">
+                  リツイート
+                </b-dropdown-item>
+                <b-dropdown-item @click="refReTweetClick(tweet)">
+                  引用リツイート
+                </b-dropdown-item>
+              </b-dropdown>
+              <span class="small">{{ tweet.retweet_count }}</span>
+            </div>
+            <div class="col-3">
+              <button
+                class="btn rounded-circle tweetIconButton"
+              >
                 <font-awesome-icon :icon="['far', 'heart']" class="" @click="() => { if ($auth.loggedIn) tweet.favorite_count++;tweetUpdate(tweet.id, tweet.favorite_count) }" />
-            </button>
-            <span class="small">{{ tweet.favorite_count }}</span>
-          </div>
-          <div class="col-3">
-            <button class="btn rounded-circle tweetIconButton">
-              <font-awesome-icon :icon="['fas', 'arrow-up']" class="" @click="tweetShareClick()" />
-            </button>
+              </button>
+              <span class="small">{{ tweet.favorite_count }}</span>
+            </div>
+            <div class="col-3">
+              <button class="btn rounded-circle tweetIconButton">
+                <font-awesome-icon :icon="['fas', 'arrow-up']" class="" @click="tweetShareClick()" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -113,6 +114,11 @@ export default {
     nestLevel: {
       type: Number,
       required: true
+    },
+    injectClass: {
+      type: Array,
+      required: false,
+      default: null
     },
     callback: {
       type: Function,
