@@ -1,6 +1,5 @@
 <template>
   <div class="index">
-    <div class="position-sticky">
       <div class="sticky-top border-bottom bg-white">
         <div class="p-2">
           <h1 class="m-0 h5 font-weight-bold">
@@ -56,7 +55,6 @@
           <Tweet :tweet-data="tweet" :nest-level="1" :callback="refresh" />
         </div>
       </div>
-    </div>
     <!-- モーダル -->
     <b-modal id="tweet_modal" :hide-footer="true">
       <TweetModal :callback="refresh" />

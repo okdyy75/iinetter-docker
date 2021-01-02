@@ -1,6 +1,5 @@
 <template>
   <div v-if="!$fetchState.pending" class="user_name">
-    <div class="position-sticky">
       <div class="sticky-top border-bottom bg-white">
         <div class="row m-2">
           <div class="d-flex">
@@ -59,7 +58,6 @@
           </div>
         </template>
       </div>
-    </div>
     <!-- モーダル -->
     <b-modal id="tweet_modal" :hide-footer="true">
       <TweetModal :callback="toTop" />
