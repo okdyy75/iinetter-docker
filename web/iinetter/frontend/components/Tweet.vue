@@ -191,6 +191,8 @@ export default {
       } else if (response.status === 422) {
         const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
         alert(errors.join('\n'))
+      } else if (response.status === 500) {
+        alert('サーバーエラーが発生しました')
       }
     }
   }

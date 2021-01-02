@@ -67,13 +67,22 @@ export default {
           'content-type': 'multipart/form-data'
         }
       }).catch(err => err.response)
-
+      this.alertErrorMessage(response)
       if (response.status === 200) {
-        // そのままトップに
-        this.$router.push('/')
-      } else {
+        // プロフィール画像が更新されないので直接リロードさせる
+        location.href = '/'
+      }
+    },
+    alertErrorMessage (response) {
+      if (response.status === 401) {
+        alert('ログインしてください')
+      } else if (response.status === 403) {
+        alert('権限がありません')
+      } else if (response.status === 422) {
         const errors = Object.keys(response.data.errors).map(key => response.data.errors[key][0])
         alert(errors.join('\n'))
+      } else if (response.status === 500) {
+        alert('サーバーエラーが発生しました')
       }
     }
   }

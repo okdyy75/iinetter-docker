@@ -21,21 +21,21 @@
               </div>
               <div class="my-3">
                 <nuxt-link :to="'/'">
-                  <button type="button" class="btn rounded-circle tweetIconButton">
+                  <button type="button" class="btn rounded-circle tweetIconButton" @click="searchButtonClick()">
                     <font-awesome-icon :icon="['fas', 'search']" class="fa-lg" />
                   </button>
                 </nuxt-link>
               </div>
               <div class="my-3">
                 <nuxt-link :to="'/'">
-                  <button type="button" class="btn rounded-circle tweetIconButton">
+                  <button type="button" class="btn rounded-circle tweetIconButton" @click="bellButtonClick()">
                     <font-awesome-icon :icon="['fas', 'bell']" class="fa-lg" />
                   </button>
                 </nuxt-link>
               </div>
               <div class="my-3">
                 <nuxt-link :to="'/'">
-                  <button type="button" class="btn rounded-circle tweetIconButton">
+                  <button type="button" class="btn rounded-circle tweetIconButton" @click="envelopeButtonClick()">
                     <font-awesome-icon :icon="['far', 'envelope']" class="fa-lg" />
                   </button>
                 </nuxt-link>
@@ -73,6 +73,15 @@ export default {
   methods: {
     logout () {
       this.$auth.logout()
+    },
+    searchButtonClick () {
+      alert('未実装です')
+    },
+    bellButtonClick () {
+      alert('未実装です')
+    },
+    envelopeButtonClick () {
+      alert('未実装です')
     }
   }
 }
