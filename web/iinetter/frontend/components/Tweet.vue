@@ -81,7 +81,7 @@
             <button
               class="btn rounded-circle tweetIconButton"
             >
-              <font-awesome-icon :icon="['far', 'heart']" class="" @click="if ($auth.loggedIn) tweet.favorite_count++;tweetUpdate(tweet.id, tweet.favorite_count)" />
+                <font-awesome-icon :icon="['far', 'heart']" class="" @click="() => { if ($auth.loggedIn) tweet.favorite_count++;tweetUpdate(tweet.id, tweet.favorite_count) }" />
             </button>
             <span class="small">{{ tweet.favorite_count }}</span>
           </div>
