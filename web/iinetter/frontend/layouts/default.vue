@@ -20,25 +20,19 @@
                 </nuxt-link>
               </div>
               <div class="my-2">
-                <nuxt-link :to="'/'">
-                  <button type="button" class="btn rounded-circle tweetIconButton" @click="searchButtonClick()">
-                    <font-awesome-icon :icon="['fas', 'search']" class="fa-lg" />
-                  </button>
-                </nuxt-link>
+                <button type="button" class="btn rounded-circle tweetIconButton" @click="searchButtonClick()">
+                  <font-awesome-icon :icon="['fas', 'search']" class="fa-lg" />
+                </button>
               </div>
               <div class="my-2">
-                <nuxt-link :to="'/'">
-                  <button type="button" class="btn rounded-circle tweetIconButton" @click="bellButtonClick()">
-                    <font-awesome-icon :icon="['fas', 'bell']" class="fa-lg" />
-                  </button>
-                </nuxt-link>
+                <button type="button" class="btn rounded-circle tweetIconButton" @click="bellButtonClick()">
+                  <font-awesome-icon :icon="['fas', 'bell']" class="fa-lg" />
+                </button>
               </div>
               <div class="my-2">
-                <nuxt-link :to="'/'">
-                  <button type="button" class="btn rounded-circle tweetIconButton" @click="envelopeButtonClick()">
-                    <font-awesome-icon :icon="['far', 'envelope']" class="fa-lg" />
-                  </button>
-                </nuxt-link>
+                <button type="button" class="btn rounded-circle tweetIconButton" @click="envelopeButtonClick()">
+                  <font-awesome-icon :icon="['far', 'envelope']" class="fa-lg" />
+                </button>
               </div>
               <div class="my-2">
                 <nuxt-link :to="'/setup_profile'">
