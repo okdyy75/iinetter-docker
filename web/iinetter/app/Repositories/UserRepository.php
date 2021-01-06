@@ -43,9 +43,9 @@ class UserRepository extends BaseRepository
      * ユーザー名から検索
      *
      * @param int $id
-     * @return User
+     * @return User|null
      */
-    public function findById(int $id): User
+    public function findById(int $id): ?User
     {
         return $this->model
             ->with([
