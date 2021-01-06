@@ -24,16 +24,27 @@ services:
     volumes:
       - "./web:/var/www/web:cached"
   # MySQL ################################################
-  mysql:
-    build: ./mysql
+  # mysql:
+  #   build: ./mysql
+  #   environment:
+  #     MYSQL_DATABASE: db
+  #     MYSQL_ROOT_PASSWORD: root
+  #     TZ: Asia/Tokyo
+  #   expose:
+  #     - "3306"
+  #   volumes:
+  #     - "./.data/mysql:/var/lib/mysql"
+  #     - "./log/mysql:/var/log/mysql"
+  #   ports:
+  #     - "3306:3306"
+  # PostgreSQL ################################################
+  postgres:
+    build: ./postgres
     environment:
-      MYSQL_DATABASE: db
-      MYSQL_ROOT_PASSWORD: root
-      TZ: Asia/Tokyo
-    expose:
-      - "3306"
+      POSTGRES_DB: db
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
     volumes:
-      - "./.data/mysql:/var/lib/mysql"
-      - "./log/mysql:/var/log/mysql"
+      - "./.data/postgres:/var/lib/postgresql/data"
     ports:
-      - "3306:3306"
+      - "5432:5432"
