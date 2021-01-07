@@ -1,4 +1,4 @@
-<?php namespace Tests\APIs;
+<?php namespace Tests\APIs\LoginUser;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\WithoutMiddleware;

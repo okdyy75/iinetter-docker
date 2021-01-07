@@ -6,6 +6,48 @@
     },
     "basePath": "/api/v1",
     "paths": {
+        "/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login",
+                "description": "Login",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "email of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "password of User",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "token": {
+                                    "description": "token",
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
         "/api_token": {
             "put": {
                 "tags": [
@@ -35,95 +77,6 @@
                         "apiToken": []
                     }
                 ]
-            }
-        },
-        "/login": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Login",
-                "description": "Login",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "email of User",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "password of User",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "token": {
-                                    "description": "token",
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/register": {
-            "post": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "Store a newly created User in storage",
-                "description": "Store User",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "description": "name of User",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "email",
-                        "in": "query",
-                        "description": "email of User",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "password of User",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "password_confirmation",
-                        "in": "query",
-                        "description": "password_confirmation of User",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "201": {
-                        "description": "successful operation"
-                    }
-                }
             }
         },
         "/tweets": {
@@ -272,22 +225,8 @@
                         "type": "integer"
                     },
                     {
-                        "name": "reply_count",
-                        "in": "query",
-                        "description": "reply_count of User",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "retweet_count",
-                        "in": "query",
-                        "description": "retweet_count of User",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
                         "name": "favorite_count",
-                        "in": "query",
+                        "in": "formData",
                         "description": "favorite_count of User",
                         "required": false,
                         "type": "string"
@@ -317,80 +256,6 @@
                         "apiToken": []
                     }
                 ]
-            }
-        },
-        "/users": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Get a listing of the Users.",
-                "description": "Get all Users",
-                "produces": [
-                    "application/json"
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/definitions/User"
-                                    }
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
-            }
-        },
-        "/users/{name}": {
-            "get": {
-                "tags": [
-                    "User"
-                ],
-                "summary": "Display the specified User",
-                "description": "Get User",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "name",
-                        "in": "path",
-                        "description": "name of User",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "properties": {
-                                "success": {
-                                    "type": "boolean"
-                                },
-                                "data": {
-                                    "$ref": "#/definitions/User"
-                                },
-                                "message": {
-                                    "type": "string"
-                                }
-                            },
-                            "type": "object"
-                        }
-                    }
-                }
             }
         },
         "/user": {
@@ -474,28 +339,28 @@
                 "parameters": [
                     {
                         "name": "name",
-                        "in": "query",
+                        "in": "formData",
                         "description": "name of User",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "email",
-                        "in": "query",
+                        "in": "formData",
                         "description": "email of User",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "password",
-                        "in": "query",
+                        "in": "formData",
                         "description": "password of User",
                         "required": false,
                         "type": "string"
                     },
                     {
                         "name": "password_confirmation",
-                        "in": "query",
+                        "in": "formData",
                         "description": "password_confirmation of User",
                         "required": false,
                         "type": "string"
@@ -639,6 +504,127 @@
                         "apiToken": []
                     }
                 ]
+            }
+        },
+        "/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Store a newly created User in storage",
+                "description": "Store User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "name of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "email of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "formData",
+                        "description": "password of User",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password_confirmation",
+                        "in": "formData",
+                        "description": "password_confirmation of User",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "201": {
+                        "description": "successful operation"
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Get a listing of the Users.",
+                "description": "Get all Users",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/definitions/User"
+                                    }
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{name}": {
+            "get": {
+                "tags": [
+                    "User"
+                ],
+                "summary": "Display the specified User",
+                "description": "Get User",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "path",
+                        "description": "name of User",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "schema": {
+                            "properties": {
+                                "success": {
+                                    "type": "boolean"
+                                },
+                                "data": {
+                                    "$ref": "#/definitions/User"
+                                },
+                                "message": {
+                                    "type": "string"
+                                }
+                            },
+                            "type": "object"
+                        }
+                    }
+                }
             }
         }
     },

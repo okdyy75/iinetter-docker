@@ -1,9 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V1\LoginUser;
 
-use App\Http\Requests\API\V1\CreateUserProfileRequest;
-use App\Http\Requests\API\V1\UpdateUserProfileRequest;
+use App\Http\Requests\API\V1\LoginUser\CreateUserProfileAPIRequest;
 use App\Models\UserProfile;
 use App\Repositories\UserProfileRepository;
 use Illuminate\Http\Request;
@@ -11,11 +10,11 @@ use App\Http\Controllers\AppBaseController;
 use Response;
 
 /**
- * Class UserProfileController
+ * Class UserProfileAPIController
  * @package App\Http\Controllers\API\V1
  */
 
-class UserProfileController extends AppBaseController
+class UserProfileAPIController extends AppBaseController
 {
     /** @var  UserProfileRepository */
     private $userProfileRepository;
@@ -145,7 +144,7 @@ class UserProfileController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateUserProfileRequest $request)
+    public function store(CreateUserProfileAPIRequest $request)
     {
         $input = $request->all();
         $input['user_id'] = auth('api')->id();

@@ -1,4 +1,4 @@
-<?php namespace Tests\APIs;
+<?php namespace Tests\APIs\LoginUser;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Tests\TestCase;
@@ -6,7 +6,7 @@ use Tests\ApiTestTrait;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class UserTest extends TestCase
+class UserAPITest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, RefreshDatabase;
 

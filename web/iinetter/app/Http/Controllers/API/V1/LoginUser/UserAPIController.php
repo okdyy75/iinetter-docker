@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V1\LoginUser;
 
-use App\Http\Requests\API\V1\UpdateUserRequest;
+use App\Http\Requests\API\V1\LoginUser\UpdateUserAPIRequest;
 use App\Models\User;
 use App\Repositories\UserRepository;
 use Illuminate\Http\Request;
@@ -11,11 +11,11 @@ use Illuminate\Support\Facades\Hash;
 use Response;
 
 /**
- * Class UserController
+ * Class UserAPIController
  * @package App\Http\Controllers\API\V1
  */
 
-class UserController extends AppBaseController
+class UserAPIController extends AppBaseController
 {
     /** @var  UserRepository */
     private $userRepository;
@@ -131,7 +131,7 @@ class UserController extends AppBaseController
      *      )
      * )
      */
-    public function update(UpdateUserRequest $request)
+    public function update(UpdateUserAPIRequest $request)
     {
         $id = auth('api')->id();
 

@@ -1,7 +1,11 @@
 <?php
 
-use App\Http\Controllers\API\V1\UserProfileController;
-use App\Http\Controllers\API\V1\TweetController;
+use App\Http\Controllers\API\V1\LoginUser\ApiTokenController as LoginUserApiTokenController;
+use App\Http\Controllers\API\V1\LoginUser\UserAPIController as LoginUserUserAPIController;
+use App\Http\Controllers\API\V1\LoginUser\UserProfileAPIController as LoginUserUserProfileAPIController;
+use App\Http\Controllers\API\V1\LoginUser\TweetAPIController as LoginUserTweetAPIController;
+use App\Http\Controllers\API\V1\LoginController;
+use App\Http\Controllers\API\V1\RegisterController;
 use App\Http\Controllers\API\V1\UserAPIController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,22 +21,22 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::group(['prefix' => 'v1', 'namespace' => 'V1'], function () {
-    Route::post('register', 'RegisterController@register');
-    Route::post('login', 'LoginController@login');
+    Route::post('register', [RegisterController::class, 'register']);
+    Route::post('login', [LoginController::class, 'login']);
 
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::put('api_token', 'ApiTokenController@update');
-        Route::get('user', 'UserController@index');
-        Route::patch('user', 'UserController@update');
-        Route::delete('user', 'UserController@destroy');
+        Route::put('api_token', [LoginUserApiTokenController::class, 'update']);
+        Route::get('user', [LoginUserUserAPIController::class, 'index']);
+        Route::patch('user', [LoginUserUserAPIController::class, 'update']);
+        Route::delete('user', [LoginUserUserAPIController::class, 'destroy']);
 
-        Route::get('user_profile', [UserProfileController::class, 'index']);
-        Route::post('user_profile', [UserProfileController::class, 'store']);
+        Route::get('user_profile', [LoginUserUserProfileAPIController::class, 'index']);
+        Route::post('user_profile', [LoginUserUserProfileAPIController::class, 'store']);
 
-        Route::get('tweets', [TweetController::class, 'index']);
-        Route::post('tweets', [TweetController::class, 'store']);
-        Route::patch('tweets/{id}', [TweetController::class, 'update']);
-        Route::delete('tweets/{id}', [TweetController::class, 'destroy']);
+        Route::get('tweets', [LoginUserTweetAPIController::class, 'index']);
+        Route::post('tweets', [LoginUserTweetAPIController::class, 'store']);
+        Route::patch('tweets/{id}', [LoginUserTweetAPIController::class, 'update']);
+        Route::delete('tweets/{id}', [LoginUserTweetAPIController::class, 'destroy']);
     });
 
     Route::get('users', [UserAPIController::class, 'index']);

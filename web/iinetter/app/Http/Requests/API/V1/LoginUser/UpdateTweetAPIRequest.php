@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\API\V1;
+namespace App\Http\Requests\API\V1\LoginUser;
 
 use App\Models\Tweet;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateTweetRequest extends APIRequest
+class UpdateTweetAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,9 @@ class CreateTweetRequest extends APIRequest
      */
     public function rules()
     {
-        return Tweet::$rules;
+        $rules = [];
+        $rules['favorite_count'] = Tweet::$rules['favorite_count'];
+        
+        return $rules;
     }
 }

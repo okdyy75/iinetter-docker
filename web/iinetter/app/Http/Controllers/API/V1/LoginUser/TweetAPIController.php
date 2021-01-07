@@ -1,22 +1,22 @@
 <?php
 
-namespace App\Http\Controllers\API\V1;
+namespace App\Http\Controllers\API\V1\LoginUser;
 
 use App\Models\Tweet;
 use App\Repositories\TweetRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
-use App\Http\Requests\API\V1\CreateTweetRequest;
-use App\Http\Requests\API\V1\UpdateTweetRequest;
+use App\Http\Requests\API\V1\LoginUser\CreateTweetAPIRequest;
+use App\Http\Requests\API\V1\LoginUser\UpdateTweetAPIRequest;
 use Illuminate\Support\Facades\Gate;
 use Response;
 
 /**
- * Class TweetController
+ * Class TweetAPIController
  * @package App\Http\Controllers\API\V1
  */
 
-class TweetController extends AppBaseController
+class TweetAPIController extends AppBaseController
 {
     /** @var  TweetRepository */
     private $tweetRepository;
@@ -69,7 +69,7 @@ class TweetController extends AppBaseController
     }
 
     /**
-     * @param CreateTweetRequest $request
+     * @param CreateTweetAPIRequest $request
      * @return Response
      *
      * @SWG\Post(
@@ -107,7 +107,7 @@ class TweetController extends AppBaseController
      *      )
      * )
      */
-    public function store(CreateTweetRequest $request)
+    public function store(CreateTweetAPIRequest $request)
     {
         $input = $request->all();
         $input['user_id'] = auth('api')->id();
@@ -119,7 +119,7 @@ class TweetController extends AppBaseController
 
     /**
      * @param int $id
-     * @param UpdateTweetRequest $request
+     * @param UpdateTweetAPIRequest $request
      * @return Response
      *
      * @SWG\Patch(
@@ -135,20 +135,6 @@ class TweetController extends AppBaseController
      *          type="integer",
      *          required=true,
      *          in="path"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="reply_count",
-     *          description="reply_count of User",
-     *          type="string",
-     *          required=false,
-     *          in="formData"
-     *      ),
-     *      @SWG\Parameter(
-     *          name="retweet_count",
-     *          description="retweet_count of User",
-     *          type="string",
-     *          required=false,
-     *          in="formData"
      *      ),
      *      @SWG\Parameter(
      *          name="favorite_count",
@@ -178,9 +164,9 @@ class TweetController extends AppBaseController
      *      )
      * )
      */
-    public function update($id, UpdateTweetRequest $request)
+    public function update($id, UpdateTweetAPIRequest $request)
     {
-        $input = $request->only(['reply_count', 'retweet_count', 'favorite_count']);
+        $input = $request->only(['favorite_count']);
 
         /** @var Tweet $tweet */
         $tweet = $this->tweetRepository->find($id);

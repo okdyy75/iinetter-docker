@@ -1,4 +1,4 @@
-<?php namespace Tests\APIs;
+<?php namespace Tests\APIs\LoginUser;
 
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
@@ -7,7 +7,7 @@ use Tests\ApiTestTrait;
 use App\Models\Tweet;
 use App\Models\User;
 
-class TweetTest extends TestCase
+class TweetAPITest extends TestCase
 {
     use ApiTestTrait, WithoutMiddleware, DatabaseTransactions;
 
@@ -34,7 +34,7 @@ class TweetTest extends TestCase
     {
         $user = User::factory()->create();
         $tweet = Tweet::factory()->create(['user_id' => $user->id, 'tweet_type' => 'tweet']);
-        $editedTweet = Tweet::factory()->make()->only(['reply_count', 'retweet_count', 'favorite_count']);
+        $editedTweet = Tweet::factory()->make()->only(['favorite_count']);
 
         $this->response = $this->actingAs($user, 'api')->json(
             'PATCH',

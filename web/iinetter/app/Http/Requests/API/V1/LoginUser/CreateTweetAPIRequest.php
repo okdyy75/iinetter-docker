@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\API\V1;
+namespace App\Http\Requests\API\V1\LoginUser;
 
-use App\Models\User;
+use App\Models\Tweet;
 use InfyOm\Generator\Request\APIRequest;
 
-class UpdateUserRequest extends APIRequest
+class CreateTweetAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,10 +24,6 @@ class UpdateUserRequest extends APIRequest
      */
     public function rules()
     {
-        $rules = User::$rules;
-        $rules['name'] = $rules['name'].",".auth('api')->id();
-        $rules['email'] = $rules['email'].",".auth('api')->id();
-        $rules['password'] = str_replace('required', 'nullable', $rules['password']);
-        return $rules;
+        return Tweet::$rules;
     }
 }

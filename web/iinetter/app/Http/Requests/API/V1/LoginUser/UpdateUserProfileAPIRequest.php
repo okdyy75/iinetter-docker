@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\API\V1;
+namespace App\Http\Requests\API\V1\LoginUser;
 
 use App\Models\UserProfile;
 use InfyOm\Generator\Request\APIRequest;
 
-class CreateUserProfileRequest extends APIRequest
+class UpdateUserProfileAPIRequest extends APIRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,8 @@ class CreateUserProfileRequest extends APIRequest
      */
     public function rules()
     {
-        return UserProfile::$rules;
+        $rules = UserProfile::$rules;
+        
+        return $rules;
     }
 }
