@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\API\V1;
 
-use App\Http\Controllers\AppBaseController;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class LoginController extends AppBaseController
+class LoginController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
