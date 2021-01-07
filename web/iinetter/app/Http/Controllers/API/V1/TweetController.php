@@ -141,21 +141,21 @@ class TweetController extends AppBaseController
      *          description="reply_count of User",
      *          type="string",
      *          required=false,
-     *          in="query"
+     *          in="formData"
      *      ),
      *      @SWG\Parameter(
      *          name="retweet_count",
      *          description="retweet_count of User",
      *          type="string",
      *          required=false,
-     *          in="query"
+     *          in="formData"
      *      ),
      *      @SWG\Parameter(
      *          name="favorite_count",
      *          description="favorite_count of User",
      *          type="string",
      *          required=false,
-     *          in="query"
+     *          in="formData"
      *      ),
      *      @SWG\Response(
      *          response=200,

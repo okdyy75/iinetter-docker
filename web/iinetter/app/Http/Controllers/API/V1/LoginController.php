@@ -36,14 +36,14 @@ class LoginController extends AppBaseController
      *          description="email of User",
      *          type="string",
      *          required=true,
-     *          in="query"
+     *          in="formData"
      *      ),
      *      @SWG\Parameter(
      *          name="password",
      *          description="password of User",
      *          type="string",
      *          required=true,
-     *          in="query"
+     *          in="formData"
      *      ),
      *      @SWG\Response(
      *          response=200,
