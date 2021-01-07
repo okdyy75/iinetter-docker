@@ -36,7 +36,7 @@
 
             <!-- Logo -->
             <a href="#" class="logo">
-                <b>InfyOm</b>
+                <b>{{ config('app.name') }}</b>
             </a>
 
             <!-- Header Navbar -->
@@ -118,7 +118,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    InfyOm Generator
+                    {{ config('app.name') }}
                 </a>
             </div>
 
