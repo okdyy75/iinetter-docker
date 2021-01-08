@@ -1,23 +1,36 @@
 # iinetter-docker
 いいねがたくさんできるtwitter風SNS  
 
-管理画面  
+### サービス
+https://iinetter.herokuapp.com  
+
+テストアカウント  
+Email：test@example.com  
+Password：password  
+
+### 管理画面
 https://adm-iinetter.herokuapp.com/login
 
-Swagger API  
-https://adm-iinetter.herokuapp.com/api/docs
+### Swagger API
+https://adm-iinetter.herokuapp.com/api/docs  
 
-サービス  
-https://iinetter.herokuapp.com
+簡単な仕様
+- ツイートするにはログイン必須
+- 各ユーザーのタイムラインは未ログインで閲覧可能
+- アカウント名・メールアドレスの変更。アカウントの削除が不可（ツイートは削除可能）
+- 出来ること：アカウント登録・ツイート・リツイート・返信・いいね
+- 出来ないこと：フォロー・ツイート検索・DM・ブックマーク・etc...（終わりが見えなかったので）
+- 管理画面はadmin権限を付与したユーザーのみログイン可
 
-
-## 使用環境・ツール
+# 使用環境・ツール
+- PostgreSQL 12.5
 - PHP 8.0
 - Laravel 8.12
-- laravel-generator 8.0以降
+- laravel-generator 8.0.x-dev
+- adminlte-templates 8.0.x-dev
 - Swagger 2.0
 - Nuxt 2.14 (Vue 2.6)
-- ※Heroku(本番)だとPostgre、apacheを使用
+- ※Heroku(本番)だとapacheを使用
 
 ## About
 ルートディレクトリ  
@@ -25,7 +38,7 @@ https://iinetter.herokuapp.com
 フロントエンド：iinetter-docker/web/iinetter/frontend  
 
 
-## Heroku環境構築
+# Heroku環境構築
 フロントエンドとバックエンドをappごと分ける
 
 フロントエンド
@@ -42,7 +55,7 @@ heroku config:set -a iinetter NPM_CONFIG_PRODUCTION=false
 
 ```
 # デプロイ
-git subtree push --prefix web/iinetter/frontend adm-heroku main
+git subtree push --prefix web/iinetter/frontend front-heroku main
 git push front-heroku `git subtree split --prefix web/iinetter/frontend main`:main --force
 
 ```

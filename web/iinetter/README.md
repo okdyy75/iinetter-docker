@@ -15,7 +15,7 @@ php artisan infyom:scaffold Xxxxx
 php artisan infyom:scaffold Xxxxx --fieldsFile=Xxxxx.json
 
 # ファイルからapi作成
-php artisan infyom:api Xxxxx --fieldsFile=Xxxxx.json
+php artisan infyom:api Xxxxx --fieldsFile=Xxxxx.json --prefix=v1
 
 # テーブルからCRUD作成
 php artisan infyom:scaffold User --fromTable --tableName=xxxxx
@@ -37,7 +37,7 @@ php artisan infyom:scaffold User --fromTable --tableName=xxxxx
     "searchable": false,
     // 入力許可
     "fillable": true,
-    // プライマリー
+    // プライマリーキーか
     "primary": false,
     // フォーム表示
     "inForm": false,
@@ -48,8 +48,11 @@ php artisan infyom:scaffold User --fromTable --tableName=xxxxx
 },
 ```
 
-リレーション参考  
-vendor/infyomlabs/laravel-generator/src/Common/GeneratorFieldRelation.php
+サンプルスキーマ参考  
+vendor/infyomlabs/laravel-generator/samples/fields_sample.json  
+
+リレーション周りはソースを参考に  
+vendor/infyomlabs/laravel-generator/src/Common/GeneratorFieldRelation.php  
 
 
 ### テーブル設計
@@ -57,11 +60,13 @@ vendor/infyomlabs/laravel-generator/src/Common/GeneratorFieldRelation.php
 users
 ------------------
 id
+is_admin
 name
 email
 email_verified_at
 password
 remember_token
+api_token
 created_at
 updated_at
 
@@ -80,13 +85,16 @@ updated_at
 tweets
 ------------------
 id
-org_tweet_id
+user_id
+ref_tweet_id
 tweet_type
 tweet_text
 reply_count
 retweet_count
 favorite_count
 created_at
+updated_at
+deleted_at
 ```
 
 
