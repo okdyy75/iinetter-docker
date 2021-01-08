@@ -77,7 +77,7 @@ class Tweet extends Model
     use HasFactory;
 
     public $table = 'tweets';
-    
+
 
     protected $dates = ['deleted_at'];
 
@@ -93,6 +93,10 @@ class Tweet extends Model
         'favorite_count'
     ];
 
+    protected $appends = [
+        'screen_favorite_count',
+    ];
+
     /**
      * The attributes that should be casted to native types.
      *
@@ -106,7 +110,7 @@ class Tweet extends Model
         'tweet_text' => 'string',
         'reply_count' => 'integer',
         'retweet_count' => 'integer',
-        'favorite_count' => 'integer'
+        'favorite_count' => 'string'
     ];
 
     /**
@@ -123,6 +127,15 @@ class Tweet extends Model
         'favorite_count' => 'nullable|integer|min:0'
     ];
 
+    #
+    # Accessors
+    #
+
+    public function getScreenFavoriteCountAttribute()
+    {
+        return $this->getKanjiNum((string) $this->favorite_count);
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      **/
@@ -137,5 +150,29 @@ class Tweet extends Model
     public function refTweet()
     {
         return $this->belongsTo(\App\Models\Tweet::class, 'ref_tweet_id', 'id');
+    }
+
+    /**
+     * 数字を漢字表記で取得する
+     * example)
+     *  Before:40003000200010000
+     *  After: 4京3兆2億1万
+     *
+     * @param string $num
+     * @return string
+     */
+    private function getKanjiNum(string $num): string
+    {
+        $length = strlen($num);
+        $digits = ['', '万', '億', '兆', '京', '垓'];
+        $kanjiNums = [];
+        $kanjiNum = '';
+
+        for ($i = 0; $i < ceil($length / 4); $i++) {
+            $kanjiNums[$i] = substr($num, -4, 4);
+            $num = substr($num, 0, -4);
+            if ($kanjiNums[$i] != '0000') $kanjiNum = (int) $kanjiNums[$i] . $digits[$i] . $kanjiNum;
+        }
+        return $kanjiNum ?: '0';
     }
 }

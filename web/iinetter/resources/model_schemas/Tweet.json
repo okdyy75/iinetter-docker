@@ -85,7 +85,7 @@
     },
     {
         "name": "favorite_count",
-        "dbType": "integer:default,0",
+        "dbType": "bigInteger,false,true:default,0",
         "htmlType": "number",
         "validations": "nullable|integer|min:0",
         "searchable": false,

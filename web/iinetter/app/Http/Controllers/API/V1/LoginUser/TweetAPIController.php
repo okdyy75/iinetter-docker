@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\AppBaseController;
 use App\Http\Requests\API\V1\LoginUser\CreateTweetAPIRequest;
 use App\Http\Requests\API\V1\LoginUser\UpdateTweetAPIRequest;
+use App\Http\Resources\V1\Loginuser\TweetResource;
 use Illuminate\Support\Facades\Gate;
 use Response;
 
@@ -114,7 +115,7 @@ class TweetAPIController extends AppBaseController
 
         $tweet = $this->tweetRepository->create($input);
 
-        return $this->sendResponse($tweet->toArray(), 'Tweet saved successfully');
+        return $this->sendResponse(new TweetResource($tweet), 'Tweet saved successfully');
     }
 
     /**
@@ -177,7 +178,7 @@ class TweetAPIController extends AppBaseController
 
         $tweet = $this->tweetRepository->update($input, $id);
 
-        return $this->sendResponse($tweet->toArray(), 'Tweet updated successfully');
+        return $this->sendResponse(new TweetResource($tweet), 'Tweet updated successfully');
     }
 
     /**

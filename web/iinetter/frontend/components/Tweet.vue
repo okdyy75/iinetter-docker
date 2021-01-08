@@ -81,9 +81,9 @@
               <button
                 class="btn rounded-circle tweetIconButton"
               >
-                <font-awesome-icon :icon="['far', 'heart']" class="" @click="() => { if ($auth.loggedIn) tweet.favorite_count++;tweetUpdate(tweet.id, tweet.favorite_count) }" />
+                <font-awesome-icon :icon="['far', 'heart']" class="" @click="() => { if ($auth.loggedIn) { if (!isNaN(tweet.screen_favorite_count)) {tweet.screen_favorite_count++;} tweet.favorite_count++;}tweetUpdate(tweet.id, tweet.favorite_count) }" />
               </button>
-              <span class="small">{{ tweet.favorite_count }}</span>
+              <span class="small" style="position: absolute;white-space: nowrap;top: 50%;transform: translateY(-50%);">{{ tweet.screen_favorite_count }}</span>
             </div>
             <div class="col-3">
               <button class="btn rounded-circle tweetIconButton">
