@@ -135,7 +135,7 @@ class UserAPIController extends AppBaseController
     {
         $id = auth('api')->id();
 
-        $input = $request->all();
+        $input = $request->only('name', 'email', 'password');
 
         /** @var User $user */
         $user = $this->userRepository->find($id);
