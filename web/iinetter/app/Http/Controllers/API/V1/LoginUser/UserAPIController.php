@@ -144,6 +144,11 @@ class UserAPIController extends AppBaseController
             return $this->sendError('User not found');
         }
 
+        if ($user->email === 'test@example.com') {
+            // testユーザーは更新不可に
+            return $this->sendError('This action is unauthorized.', 403);
+        }
+
         if (isset($input['password'])) {
             $input['password'] = Hash::make($input['password']);
         }
@@ -194,6 +199,11 @@ class UserAPIController extends AppBaseController
 
         if (empty($user)) {
             return $this->sendError('User not found');
+        }
+
+        if ($user->email === 'test@example.com') {
+            // testユーザーは削除不可に
+            return $this->sendError('This action is unauthorized.', 403);
         }
 
         $user->delete();
